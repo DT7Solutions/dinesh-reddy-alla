@@ -7,9 +7,12 @@ import imgArrow1 from "../imports/DineshAllaPortfolio/78169e50f6c898cb645ee892d7
 import imgArrow3 from "../imports/DineshAllaPortfolio/78169e50f6c898cb645ee892d7c8dd7082c396a9.png";
 import imgArrow5 from "../imports/DineshAllaPortfolio/87311fc93eced249456d4e21ff54587b04ab3837.png";
 import imgArrow2 from "../imports/DineshAllaPortfolio/39311d50c40814cdebc014564a2c324135115f27.png";
-import imgImage22 from "../imports/DineshAllaPortfolio/9120b21f262a2cc2f1505314c1c81cf46157c75e.png";
-import imgAwsBadge from "../imports/DineshAllaPortfolio/aws_certificate_badge.png";
-import imgEntrepreneurBadge from "../imports/DineshAllaPortfolio/entrepreneur_award_badge.png";
+import imgIimCertificate from "../imports/DineshAllaPortfolio/iim_certificate.png";
+import imgSkillNationCertificate from "../imports/DineshAllaPortfolio/skill_nation_certificate.png";
+import imgJConnectCertificate from "../imports/DineshAllaPortfolio/j_connect_certificate.png";
+import imgIimSpeech from "../imports/DineshAllaPortfolio/iim_speech.png";
+import imgBniMember from "../imports/DineshAllaPortfolio/bni_member.png";
+import imgEntrepreneurAwardBadge from "../imports/DineshAllaPortfolio/entrepreneur_award_badge.png";
 import imgImage24 from "../imports/DineshAllaPortfolio/ed0d5886e0cbe0515e8fbbcc54f27379a82c2809.png";
 import imgImage25 from "../imports/DineshAllaPortfolio/0f910d08394d014585907cf11a1267366e5ae17a.png";
 import imgImage26 from "../imports/DineshAllaPortfolio/d6fb729b37b4a58bd76ed7b07aaa37fc50301315.png";
@@ -82,7 +85,7 @@ function Nav() {
   useEffect(() => {
     let lastScrolled = false;
     const fn = () => {
-      const isScrolled = window.scrollY > 10;
+      const isScrolled = window.scrollY > 100;
       if (isScrolled !== lastScrolled) {
         lastScrolled = isScrolled;
         setScrolled(isScrolled);
@@ -100,12 +103,12 @@ function Nav() {
 
   return (
     <header
-      className="fixed top-0 inset-x-0 z-50 transition-[box-shadow] duration-300"
+      className="fixed top-0 inset-x-0 z-50 transition-[background-color,box-shadow,border-color] duration-300"
       style={{
-        background: "rgba(255, 255, 255, 0.25)",
-        backdropFilter: "blur(24px) saturate(180%)",
-        WebkitBackdropFilter: "blur(24px) saturate(180%)",
-        borderBottom: "1px solid rgba(255, 255, 255, 0.6)",
+        background: scrolled ? "#ffffff" : "rgba(255, 255, 255, 0.25)",
+        backdropFilter: scrolled ? "none" : "blur(24px) saturate(180%)",
+        WebkitBackdropFilter: scrolled ? "none" : "blur(24px) saturate(180%)",
+        borderBottom: scrolled ? "1px solid #e5e5e5" : "1px solid rgba(255, 255, 255, 0.6)",
         boxShadow: scrolled
           ? "0 8px 32px rgba(0, 0, 0, 0.08), inset 0 1px 0 rgba(255,255,255,0.8)"
           : "inset 0 1px 0 rgba(255,255,255,0.6)",
@@ -328,7 +331,9 @@ function Hero() {
             <span style={{ color: "#0a1422" }}>&amp; CEO OF </span>
             <span style={{ color: "#ea4723" }}>DT7</span>
             <br />
-            <span style={{ color: "#ea4723" }}>AGENCY</span>
+            <span style={{ color: "transparent", WebkitTextStroke: "1.5px #ea4723" }}>
+              AGENCY
+            </span>
           </h1>
         </div>
       </motion.div>
@@ -343,11 +348,10 @@ function Hero() {
         <img
           src={imgImage19}
           alt="Dinesh Alla"
-          className="object-cover pointer-events-none"
+          className="object-cover pointer-events-none mt-0 md:-mt-10"
           style={{
             width: "clamp(240px, 31.4vw, 452px)",
             height: "clamp(240px, 31.4vw, 452px)",
-            marginTop: "-40px",
           }}
         />
       </motion.div>
@@ -442,15 +446,11 @@ function About() {
         <div className="flex flex-col md:flex-row gap-12 md:gap-16 items-start">
 
           {/* ── LEFT: layered photo stack ─────────────────────────────────────── */}
-          <Reveal className="flex-shrink-0 w-full md:w-auto">
-            {/*
-              Figma layout (on 1440px canvas):
-              • Dark box  : x=150, y=1107, w=367, h=473  → bg-[#020508]
-              • Photo     : x=190, y=1147, w=367, h=473  → 40px right + 40px down
-              • Orange dot: top-right corner of dark box  (x=502, y=1107) → size 15x15
-              • Orange dot: bottom-left, x=150, y=1565   → size 15x15
-            */}
-            <div className="relative" style={{ width: 407, height: 530 }}>
+          <Reveal className="flex-shrink-0 w-full flex justify-center h-[390px] min-[400px]:h-[440px] md:h-[530px] md:w-auto">
+            <div
+              className="origin-top flex-shrink-0 scale-[0.7] min-[400px]:scale-[0.8] md:scale-100"
+              style={{ position: "relative", width: 407, height: 530, transformOrigin: "top center" }}
+            >
               {/* Dark shadow backdrop */}
               <div
                 className="absolute bg-[#020508]"
@@ -766,24 +766,24 @@ const EDUCATION_DATA = [
     category: "Post Graduation",
     title: "IIM Visakhapatnam",
     description: "I am thrilled that I completed my Post Graduation in Digital Marketing and Growth from IIM Visakhapatnam. This program has sharpened my digital marketing expertise, empowering me to drive growth in the digital era.",
-    image: imgRectangle54,
+    image: imgIimSpeech,
     filter: "none",
   },
   {
     id: 2,
-    category: "AWS Cloud Architecture",
-    title: "AWS Certification",
-    description: "Certified Solutions Architect specializing in designing secure, robust, and cost-effective cloud systems. Developed core expertise in scaling applications and managing global cloud infrastructure.",
-    image: imgRectangle55,
+    category: "Professional Network",
+    title: "BNI Guntur",
+    description: "I am proud to be a member of BNI Guntur, a vibrant network of business professionals. Being part of this community has enhanced my networking skills and opened new avenues for collaboration.",
+    image: imgBniMember,
     filter: "none",
   },
   {
     id: 3,
-    category: "Entrepreneurship & Leadership",
-    title: "Business Growth Strategy",
-    description: "Founded and scaled DT7 Solutions to a leading provider of digital transformation and creative solutions. Mastered executive-level business scaling, team management, and corporate strategy.",
-    image: imgRectangle55,
-    filter: "hue-rotate(120deg) saturate(1.2)",
+    category: "Service & Leadership",
+    title: "Rotary Club",
+    description: "Honored to be a member of the Rotary Club, a global community dedicated to service and leadership. Being part of this esteemed group inspires me to contribute meaningfully to society and foster impactful connections.",
+    image: imgEntrepreneurAwardBadge,
+    filter: "none",
   }
 ];
 
@@ -811,7 +811,7 @@ function Education() {
   }, [isHovered]);
 
   return (
-    <section 
+    <section
       className="bg-white py-16 md:py-24"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
@@ -821,7 +821,7 @@ function Education() {
         {/* Centered title */}
         <Reveal className="text-center mb-14">
           <h2
-            className="text-[32px] md:text-[40px] font-medium text-[#0a1422] leading-snug text-center mx-auto"
+            className="text-[28px] md:text-[40px] font-medium text-[#0a1422] leading-snug text-center mx-auto"
             style={{ fontFamily: "'Afacad Flux', sans-serif", maxWidth: 591 }}
           >
             Built on Education Defined by Honour Driven by Purpose
@@ -832,12 +832,12 @@ function Education() {
         <div className="flex flex-col lg:flex-row gap-10 lg:gap-16 items-start">
 
           {/* ── Phone mockup image grid ── */}
-          <Reveal className="flex-shrink-0">
-            <div style={{ display: "flex", gap: 12, alignItems: "flex-start" }}>
-              {/* Narrow left col: 2 stacked with 12px vertical gap */}
-              <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
+          <Reveal className="flex-shrink-0 w-full md:w-auto">
+            <div className="flex gap-[12px] items-start w-full justify-center md:justify-start">
+              {/* Narrow left col: hidden on mobile/tablet, visible on md and up */}
+              <div className="hidden md:flex flex-col gap-[12px] flex-shrink-0">
                 {/* Top: flipped previous item */}
-                <div style={{ width: 258, height: 267, overflow: "hidden", background: "#d9d9d9" }}>
+                <div className="w-[180px] h-[186px] lg:w-[258px] lg:h-[267px] overflow-hidden bg-[#d9d9d9]">
                   <motion.div
                     key={`prev-${prevItem.id}`}
                     initial={{ opacity: 0 }}
@@ -849,20 +849,20 @@ function Education() {
                       <img
                         src={prevItem.image}
                         alt="Previous mockup"
-                        style={{ 
-                          width: "100%", 
-                          height: "100%", 
-                          objectFit: "cover", 
-                          display: "block", 
+                        style={{
+                          width: "100%",
+                          height: "100%",
+                          objectFit: "cover",
+                          display: "block",
                           pointerEvents: "none",
-                          filter: prevItem.filter 
+                          filter: prevItem.filter
                         }}
                       />
                     </div>
                   </motion.div>
                 </div>
                 {/* Bottom: normal next item */}
-                <div style={{ width: 258, height: 267, overflow: "hidden", background: "#d9d9d9" }}>
+                <div className="w-[180px] h-[186px] lg:w-[258px] lg:h-[267px] overflow-hidden bg-[#d9d9d9]">
                   <motion.div
                     key={`next-${nextItem.id}`}
                     initial={{ opacity: 0 }}
@@ -873,20 +873,20 @@ function Education() {
                     <img
                       src={nextItem.image}
                       alt="Next mockup"
-                      style={{ 
-                        width: "100%", 
-                        height: "100%", 
-                        objectFit: "cover", 
-                        display: "block", 
+                      style={{
+                        width: "100%",
+                        height: "100%",
+                        objectFit: "cover",
+                        display: "block",
                         pointerEvents: "none",
-                        filter: nextItem.filter 
+                        filter: nextItem.filter
                       }}
                     />
                   </motion.div>
                 </div>
               </div>
               {/* Wide right col: 1 tall active phone */}
-              <div style={{ width: 387, height: 546, overflow: "hidden", background: "#d9d9d9" }}>
+              <div className="w-full max-w-[340px] md:w-[270px] md:h-[381px] lg:w-[387px] lg:h-[546px] aspect-[387/546] md:aspect-auto overflow-hidden bg-[#d9d9d9]">
                 <motion.div
                   key={`active-${activeItem.id}`}
                   initial={{ opacity: 0, scale: 0.98 }}
@@ -897,13 +897,13 @@ function Education() {
                   <img
                     src={activeItem.image}
                     alt="Active mockup"
-                    style={{ 
-                      width: "100%", 
-                      height: "100%", 
-                      objectFit: "cover", 
-                      display: "block", 
+                    style={{
+                      width: "100%",
+                      height: "100%",
+                      objectFit: "cover",
+                      display: "block",
                       pointerEvents: "none",
-                      filter: activeItem.filter 
+                      filter: activeItem.filter
                     }}
                   />
                 </motion.div>
@@ -1001,25 +1001,25 @@ const AWARDS_DATA = [
     title: "IIM Certificate",
     issuer: "IIM Visakhapatnam",
     description: "Completed the Post Graduation in Digital Marketing and Growth from IIM Visakhapatnam.",
-    image: imgImage22,
+    image: imgIimCertificate,
     color: "#5e4080", // Purple
   },
   {
     id: 2,
-    year: "2022",
-    title: "AWS Certified",
-    issuer: "Amazon Web Services",
-    description: "Certified Solutions Architect specializing in designing secure and cost-efficient cloud architectures.",
-    image: imgAwsBadge,
+    year: "2023",
+    title: "Skill Nation Certificate",
+    issuer: "Skill Nation",
+    description: "Skill Nation Certificate for WhatsApp Marketing & Automation, showcasing expertise in marketing strategies.",
+    image: imgSkillNationCertificate,
     color: "#373758", // Dark Blue
   },
   {
     id: 3,
-    year: "2022",
-    title: "Entrepreneurship",
-    issuer: "DT7 Solutions",
-    description: "Founded DT7 Solutions, scaling it to a leading provider of digital transformation and growth strategies.",
-    image: imgEntrepreneurBadge,
+    year: "2023",
+    title: "J Connect Certificate",
+    issuer: "J Connect",
+    description: "J Connect Certificate for New Age Digital Marketing, recognizing expertise in modern digital strategies.",
+    image: imgJConnectCertificate,
     color: "#f09800", // Orange
   }
 ];
@@ -1108,7 +1108,7 @@ function Awards() {
           {/* ── CENTER: stacked card ── */}
           <Reveal delay={0.1} className="flex-shrink-0 w-full max-w-[406px]">
             {/* Outer wrapper accounts for the stack offset at top */}
-            <div 
+            <div
               onMouseEnter={() => setIsHovered(true)}
               onMouseLeave={() => setIsHovered(false)}
               className="relative w-full"
@@ -1177,12 +1177,12 @@ function Awards() {
                         <img
                           src={card.image}
                           alt={card.title}
-                          style={{ 
-                            width: "100%", 
-                            height: "100%", 
-                            objectFit: card.image === imgImage22 ? "cover" : "contain", 
-                            display: "block", 
-                            pointerEvents: "none" 
+                          style={{
+                            width: "100%",
+                            height: "100%",
+                            objectFit: "contain",
+                            display: "block",
+                            pointerEvents: "none"
                           }}
                         />
                       </div>
@@ -1305,11 +1305,14 @@ function Enterprises() {
           </h2>
         </Reveal>
 
-        <div className="flex flex-col lg:flex-row gap-16 items-start">
+        <div className="flex flex-col lg:flex-row gap-10 lg:gap-16 items-center justify-center">
 
           {/* ── Logo grid — exact Figma positions ── */}
-          <Reveal className="flex-shrink-0 overflow-hidden">
-            <div style={{ position: "relative", width: gridW, height: gridH }}>
+          <Reveal className="flex-shrink-0 overflow-hidden w-full lg:w-[612px] flex justify-center h-[370px] min-[400px]:h-[460px] sm:h-[640px] md:h-[707px]">
+            <div
+              className="origin-top flex-shrink-0 scale-[0.52] min-[400px]:scale-[0.65] sm:scale-[0.9] md:scale-100"
+              style={{ position: "relative", width: gridW, height: gridH, transformOrigin: "top center" }}
+            >
               {CELLS.map((cell, i) => (
                 <div
                   key={i}
@@ -1338,7 +1341,7 @@ function Enterprises() {
           </Reveal>
 
           {/* ── Stats ── */}
-          <Reveal delay={0.15} className="flex-1 flex flex-col justify-center gap-12 pt-8">
+          <Reveal delay={0.15} className="w-full lg:w-[380px] lg:flex-shrink-0 flex flex-col items-center lg:items-start justify-center gap-8 md:gap-12 pt-8">
             {STATS.map((stat) => (
               <div key={stat.label} className="flex items-center gap-6">
                 {/* Large number */}
@@ -1381,6 +1384,16 @@ const T_CARDS = [
 ];
 
 function Testimonials() {
+  const [activeT, setActiveT] = useState(0);
+
+  const handlePrevT = () => {
+    setActiveT((prev) => (prev - 1 + T_CARDS.length) % T_CARDS.length);
+  };
+
+  const handleNextT = () => {
+    setActiveT((prev) => (prev + 1) % T_CARDS.length);
+  };
+
   return (
     <section id="testimonials" className="bg-white pb-16 md:pb-24">
 
@@ -1397,8 +1410,8 @@ function Testimonials() {
         </Reveal>
       </div>
 
-      {/* Horizontal carousel — auto-scrolling left, infinite loop */}
-      <div style={{ overflow: "hidden", width: "100%" }}>
+      {/* DESKTOP marquee — hidden on mobile, visible on desktop */}
+      <div className="hidden md:block" style={{ overflow: "hidden", width: "100%" }}>
         <motion.div
           animate={{ x: ["-430px", "-2030px"] }}
           transition={{ duration: 25, repeat: Infinity, ease: "linear", repeatType: "loop" }}
@@ -1444,6 +1457,79 @@ function Testimonials() {
         </motion.div>
       </div>
 
+      {/* MOBILE slider — visible on mobile, hidden on desktop */}
+      <div className="block md:hidden px-6 w-full max-w-[600px] mx-auto">
+        <div style={{
+          background: "#f3f8ff",
+          border: "1px solid #e5e5e5",
+          borderRadius: 10,
+          width: "100%",
+          padding: "24px 24px 20px 24px",
+          display: "flex",
+          flexDirection: "column",
+          minHeight: 280,
+        }}>
+          {/* Quote */}
+          <motion.p
+            key={activeT}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.4 }}
+            style={{
+              fontFamily: "'Afacad Flux', sans-serif", fontWeight: 300,
+              fontSize: 20, color: "#0a1422", lineHeight: 1.45,
+              flex: 1, marginBottom: 20,
+            }}
+          >
+            {T_CARDS[activeT].quote}
+          </motion.p>
+
+          {/* Bottom */}
+          <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 12 }}>
+            <div>
+              <p style={{ fontFamily: "'Afacad Flux', sans-serif", fontWeight: 600, fontSize: 24, color: "#0a1422", margin: 0 }}>
+                {T_CARDS[activeT].name}
+              </p>
+              <p style={{ fontFamily: "'Afacad Flux', sans-serif", fontWeight: 400, fontSize: 16, color: "#0a1422", margin: 0 }}>
+                {T_CARDS[activeT].company}
+              </p>
+            </div>
+            <div style={{ width: 64, height: 52, background: "white", borderRadius: 8, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
+              <img src={T_CARDS[activeT].logo} alt="" style={{ maxWidth: "80%", maxHeight: "80%", objectFit: "contain", pointerEvents: "none" }} />
+            </div>
+          </div>
+        </div>
+
+        {/* Navigation arrows */}
+        <div className="flex justify-center gap-4 mt-6">
+          <button
+            onClick={handlePrevT}
+            className="w-11 h-11 rounded-full flex items-center justify-center transition-all duration-200"
+            style={{ background: "#0a1422" }}
+            onMouseEnter={(e) => (e.currentTarget.style.background = "#f09800")}
+            onMouseLeave={(e) => (e.currentTarget.style.background = "#0a1422")}
+          >
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+              <path d="M14 9H4" stroke="white" strokeWidth="1.8" strokeLinecap="round" />
+              <path d="M8 13L4 9L8 5" stroke="white" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+          </button>
+
+          <button
+            onClick={handleNextT}
+            className="w-11 h-11 rounded-full flex items-center justify-center transition-all duration-200"
+            style={{ background: "#f09800" }}
+            onMouseEnter={(e) => (e.currentTarget.style.background = "#0a1422")}
+            onMouseLeave={(e) => (e.currentTarget.style.background = "#f09800")}
+          >
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+              <path d="M4 9H14" stroke="white" strokeWidth="1.8" strokeLinecap="round" />
+              <path d="M10 5L14 9L10 13" stroke="white" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+          </button>
+        </div>
+      </div>
+
     </section>
   );
 }
@@ -1462,13 +1548,43 @@ function Contact() {
     return e;
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const errs = validate();
     if (Object.keys(errs).length) { setErrors(errs); return; }
     setErrors({});
     setStatus("loading");
-    setTimeout(() => setStatus("sent"), 1600);
+
+    try {
+      const response = await fetch("https://api.emailjs.com/api/v1.0/email/send", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          service_id: import.meta.env.VITE_EMAILJS_SERVICE_ID || "service_oqk9ebd",
+          template_id: import.meta.env.VITE_EMAILJS_TEMPLATE_ID || "template_e34ayvr",
+          user_id: import.meta.env.VITE_EMAILJS_PUBLIC_KEY || "Di159h43CNTx3xpQM",
+          template_params: {
+            from_name: form.name,
+            from_email: form.email,
+            reply_to: form.email,
+            message: form.message,
+          },
+        }),
+      });
+
+      if (response.ok) {
+        setStatus("sent");
+      } else {
+        const errText = await response.text();
+        setErrors({ submit: `Failed to send: ${errText || response.statusText}` });
+        setStatus("idle");
+      }
+    } catch (err: any) {
+      setErrors({ submit: `Error: ${err.message || err}` });
+      setStatus("idle");
+    }
   };
 
   return (
@@ -1586,6 +1702,8 @@ function Contact() {
                   />
                   {errors.message && <p className="text-xs text-red-500 mt-1">{errors.message}</p>}
                 </div>
+
+                {errors.submit && <p className="text-sm text-red-500 mb-6">{errors.submit}</p>}
 
                 <button
                   type="submit"
