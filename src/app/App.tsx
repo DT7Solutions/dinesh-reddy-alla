@@ -760,9 +760,62 @@ function Experience() {
 }
 
 // ─── EDUCATION ────────────────────────────────────────────────────────────────
+const EDUCATION_DATA = [
+  {
+    id: 1,
+    category: "Post Graduation",
+    title: "IIM Visakhapatnam",
+    description: "I am thrilled that I completed my Post Graduation in Digital Marketing and Growth from IIM Visakhapatnam. This program has sharpened my digital marketing expertise, empowering me to drive growth in the digital era.",
+    image: imgRectangle54,
+    filter: "none",
+  },
+  {
+    id: 2,
+    category: "AWS Cloud Architecture",
+    title: "AWS Certification",
+    description: "Certified Solutions Architect specializing in designing secure, robust, and cost-effective cloud systems. Developed core expertise in scaling applications and managing global cloud infrastructure.",
+    image: imgRectangle55,
+    filter: "none",
+  },
+  {
+    id: 3,
+    category: "Entrepreneurship & Leadership",
+    title: "Business Growth Strategy",
+    description: "Founded and scaled DT7 Solutions to a leading provider of digital transformation and creative solutions. Mastered executive-level business scaling, team management, and corporate strategy.",
+    image: imgRectangle55,
+    filter: "hue-rotate(120deg) saturate(1.2)",
+  }
+];
+
 function Education() {
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [isHovered, setIsHovered] = useState(false);
+
+  const prevIndex = (activeIndex - 1 + EDUCATION_DATA.length) % EDUCATION_DATA.length;
+  const nextIndex = (activeIndex + 1) % EDUCATION_DATA.length;
+
+  const activeItem = EDUCATION_DATA[activeIndex];
+  const prevItem = EDUCATION_DATA[prevIndex];
+  const nextItem = EDUCATION_DATA[nextIndex];
+
+  const handleNext = () => {
+    setActiveIndex((prev) => (prev + 1) % EDUCATION_DATA.length);
+  };
+
+  useEffect(() => {
+    if (isHovered) return;
+    const interval = setInterval(() => {
+      handleNext();
+    }, 5000);
+    return () => clearInterval(interval);
+  }, [isHovered]);
+
   return (
-    <section className="bg-white py-16 md:py-24">
+    <section 
+      className="bg-white py-16 md:py-24"
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    >
       <div className="max-w-[1440px] mx-auto px-6 md:px-[150px]">
 
         {/* Centered title */}
@@ -778,94 +831,140 @@ function Education() {
         {/* Content: grey grid LEFT + text RIGHT */}
         <div className="flex flex-col lg:flex-row gap-10 lg:gap-16 items-start">
 
-          {/* ── Phone mockup image grid — using real Figma assets ──
-              Narrow left col (w=258):
-                Top: imgRectangle55 flipped -scale-y-100 rotate-180 (matches Figma)
-                Bot: imgRectangle55 normal
-              Wide right col (w=387): imgRectangle54 tall
-          */}
+          {/* ── Phone mockup image grid ── */}
           <Reveal className="flex-shrink-0">
-            {/* 12px gap between left col and right col, 12px gap between stacked images — exact Figma spacing */}
             <div style={{ display: "flex", gap: 12, alignItems: "flex-start" }}>
               {/* Narrow left col: 2 stacked with 12px vertical gap */}
               <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
-                {/* Top: flipped — Figma uses -scale-y-100 rotate-180 */}
+                {/* Top: flipped previous item */}
                 <div style={{ width: 258, height: 267, overflow: "hidden", background: "#d9d9d9" }}>
-                  <div style={{ transform: "scale(1,-1) rotate(180deg)", width: "100%", height: "100%" }}>
-                    <img
-                      src={imgRectangle55}
-                      alt="Phone mockup"
-                      style={{ width: "100%", height: "100%", objectFit: "cover", display: "block", pointerEvents: "none" }}
-                    />
-                  </div>
+                  <motion.div
+                    key={`prev-${prevItem.id}`}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ duration: 0.5 }}
+                    style={{ width: "100%", height: "100%" }}
+                  >
+                    <div style={{ transform: "scale(1,-1) rotate(180deg)", width: "100%", height: "100%" }}>
+                      <img
+                        src={prevItem.image}
+                        alt="Previous mockup"
+                        style={{ 
+                          width: "100%", 
+                          height: "100%", 
+                          objectFit: "cover", 
+                          display: "block", 
+                          pointerEvents: "none",
+                          filter: prevItem.filter 
+                        }}
+                      />
+                    </div>
+                  </motion.div>
                 </div>
-                {/* Bottom: normal */}
+                {/* Bottom: normal next item */}
                 <div style={{ width: 258, height: 267, overflow: "hidden", background: "#d9d9d9" }}>
-                  <img
-                    src={imgRectangle55}
-                    alt="Phone mockup"
-                    style={{ width: "100%", height: "100%", objectFit: "cover", display: "block", pointerEvents: "none" }}
-                  />
+                  <motion.div
+                    key={`next-${nextItem.id}`}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ duration: 0.5 }}
+                    style={{ width: "100%", height: "100%" }}
+                  >
+                    <img
+                      src={nextItem.image}
+                      alt="Next mockup"
+                      style={{ 
+                        width: "100%", 
+                        height: "100%", 
+                        objectFit: "cover", 
+                        display: "block", 
+                        pointerEvents: "none",
+                        filter: nextItem.filter 
+                      }}
+                    />
+                  </motion.div>
                 </div>
               </div>
-              {/* Wide right col: 1 tall analytics phone */}
+              {/* Wide right col: 1 tall active phone */}
               <div style={{ width: 387, height: 546, overflow: "hidden", background: "#d9d9d9" }}>
-                <img
-                  src={imgRectangle54}
-                  alt="Analytics dashboard"
-                  style={{ width: "100%", height: "100%", objectFit: "cover", display: "block", pointerEvents: "none" }}
-                />
+                <motion.div
+                  key={`active-${activeItem.id}`}
+                  initial={{ opacity: 0, scale: 0.98 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.5 }}
+                  style={{ width: "100%", height: "100%" }}
+                >
+                  <img
+                    src={activeItem.image}
+                    alt="Active mockup"
+                    style={{ 
+                      width: "100%", 
+                      height: "100%", 
+                      objectFit: "cover", 
+                      display: "block", 
+                      pointerEvents: "none",
+                      filter: activeItem.filter 
+                    }}
+                  />
+                </motion.div>
               </div>
             </div>
           </Reveal>
 
           {/* ── Right text panel ── */}
           <Reveal delay={0.15} className="flex-1 pt-0 lg:pt-16">
-            {/* Post Graduation — orange label */}
-            <p
-              style={{
-                fontFamily: "'Afacad Flux', sans-serif",
-                fontWeight: 500,
-                fontSize: 24,
-                color: "#f09800",
-                marginBottom: 8,
-              }}
+            <motion.div
+              key={activeIndex}
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.4, ease: "easeOut" }}
             >
-              Post Graduation
-            </p>
+              {/* Category label */}
+              <p
+                style={{
+                  fontFamily: "'Afacad Flux', sans-serif",
+                  fontWeight: 500,
+                  fontSize: 24,
+                  color: "#f09800",
+                  marginBottom: 8,
+                }}
+              >
+                {activeItem.category}
+              </p>
 
-            {/* IIM Visakhapatnam */}
-            <h3
-              style={{
-                fontFamily: "'Afacad Flux', sans-serif",
-                fontWeight: 500,
-                fontSize: "clamp(32px, 3.33vw, 48px)",
-                color: "#0a1422",
-                lineHeight: 1.15,
-                marginBottom: 16,
-              }}
-            >
-              IIM Visakhapatnam
-            </h3>
+              {/* Title */}
+              <h3
+                style={{
+                  fontFamily: "'Afacad Flux', sans-serif",
+                  fontWeight: 500,
+                  fontSize: "clamp(32px, 3.33vw, 48px)",
+                  color: "#0a1422",
+                  lineHeight: 1.15,
+                  marginBottom: 16,
+                }}
+              >
+                {activeItem.title}
+              </h3>
 
-            {/* Description */}
-            <p
-              style={{
-                fontFamily: "'Afacad Flux', sans-serif",
-                fontWeight: 400,
-                fontSize: 20,
-                color: "#8b8b8b",
-                lineHeight: 1.6,
-                maxWidth: 453,
-                marginBottom: 32,
-              }}
-            >
-              I am thrilled that I completed my Post Graduation in Digital Marketing and Growth from IIM Visakhapatnam. This program has sharpened my digital marketing expertise, empowering me to drive growth in the digital era.
-            </p>
+              {/* Description */}
+              <p
+                style={{
+                  fontFamily: "'Afacad Flux', sans-serif",
+                  fontWeight: 400,
+                  fontSize: 20,
+                  color: "#8b8b8b",
+                  lineHeight: 1.6,
+                  maxWidth: 453,
+                  marginBottom: 32,
+                }}
+              >
+                {activeItem.description}
+              </p>
+            </motion.div>
 
-            {/* View Next button — dark pill, text LEFT, orange circle RIGHT */}
+            {/* View Next button */}
             <button
-              onClick={() => document.getElementById("awards")?.scrollIntoView({ behavior: "smooth" })}
+              onClick={handleNext}
               className="flex items-center rounded-[50px] overflow-hidden transition-opacity duration-200"
               style={{ background: "#0a1422", height: 54, width: 173, paddingLeft: 20, gap: 0 }}
               onMouseEnter={(e) => (e.currentTarget.style.opacity = "0.9")}
@@ -877,7 +976,7 @@ function Education() {
               >
                 View Next
               </span>
-              {/* Orange circle with arrow — on the RIGHT */}
+              {/* Orange circle with arrow */}
               <div
                 className="flex-shrink-0 flex items-center justify-center rounded-full"
                 style={{ width: 44, height: 44, background: "#f09800", marginRight: 5 }}
