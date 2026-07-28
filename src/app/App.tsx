@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import { motion, useInView } from "motion/react";
+import { motion, useInView, useScroll } from "motion/react";
 import svgPaths from "../imports/DineshAllaPortfolio/svg-ux7tgka6em";
 import imgImage19 from "../imports/DineshAllaPortfolio/ae7ff146b4f0cd8702caa1b9b115640b9a811a06.png";
 import imgRectangle34 from "../imports/DineshAllaPortfolio/dfcb74d743d45e2b342af9f04c54f6ed74efd874.png";
@@ -44,6 +44,32 @@ function Reveal({
       ref={ref}
       initial={{ opacity: 0, y: 24 }}
       animate={inView ? { opacity: 1, y: 0 } : {}}
+      transition={{ duration: 0.6, delay, ease: [0.22, 1, 0.36, 1] }}
+      className={className}
+    >
+      {children}
+    </motion.div>
+  );
+}
+
+function RevealRight({
+  children,
+  delay = 0,
+  className = "",
+  xOffset = 100,
+}: {
+  children: React.ReactNode;
+  delay?: number;
+  className?: string;
+  xOffset?: number;
+}) {
+  const ref = useRef(null);
+  const inView = useInView(ref, { once: true, margin: "-60px" });
+  return (
+    <motion.div
+      ref={ref}
+      initial={{ opacity: 0, x: xOffset }}
+      animate={inView ? { opacity: 1, x: 0 } : {}}
       transition={{ duration: 0.6, delay, ease: [0.22, 1, 0.36, 1] }}
       className={className}
     >
@@ -236,7 +262,7 @@ function Hero() {
         className="text-center mt-8 text-[16px] md:text-[18px] text-[#0c0f22] px-4"
         style={{ fontFamily: "'Poppins', sans-serif", fontWeight: 300 }}
       >
-        👋 Hi, I'm Dinesh Alla and I am the
+        Hello, I am Dinesh Alla — a forward-thinking technologist and entrepreneur.
       </motion.p>
 
       {/* ── Giant heading ──
@@ -368,7 +394,7 @@ function Hero() {
           maxWidth: 791,
         }}
       >
-        Founder &amp; CEO · DT7 Agency Pvt. Ltd. · AWS Architect · Web Development · Cloud Services · Branding · Digital Marketing · Creative Strategies · Business Amplification
+        Architecting scalable cloud solutions, building high-performance web applications, and driving digital growth as the Founder &amp; CEO of DT7 Agency.
       </motion.p>
 
       {/* ── CTA button — orange circle LEFT, text RIGHT ── */}
@@ -403,7 +429,7 @@ function Hero() {
             className="text-[#0a1422] text-[15px] md:text-[16px] font-medium whitespace-nowrap"
             style={{ fontFamily: "'Poppins', sans-serif", marginLeft: 14, marginRight: 4 }}
           >
-            Let's Connect with Me
+            Start a Conversation
           </span>
         </button>
       </motion.div>
@@ -489,7 +515,7 @@ function About() {
                 - Gradient line to the RIGHT of the orange block at the same vertical level
             */}
             <div className="flex items-center gap-0 mb-5 md:mb-6">
-              <div className="relative flex-shrink-0" style={{ width: 184, height: 51 }}>
+              <div className="relative flex-shrink-0" style={{ width: 240, height: 51 }}>
                 {/* Orange background */}
                 <div className="absolute inset-0 bg-[#f09800]" />
                 {/* Text sits 15px from left of orange block */}
@@ -504,7 +530,7 @@ function About() {
                     whiteSpace: "nowrap",
                   }}
                 >
-                  My Story
+                  My Journey
                 </h2>
               </div>
               {/* Gradient rule extending to the right of the heading */}
@@ -519,7 +545,7 @@ function About() {
               className="text-[15px] md:text-[16px] leading-relaxed text-[#0c0f22] mb-5"
               style={{ fontFamily: "'Poppins', sans-serif", fontWeight: 300 }}
             >
-              I began my career in 2013 as a Junior Developer, gaining expertise in software development, database management, and AWS solutions. Over the years, I advanced in technology and leadership, mastering diverse technical domains. In 2022, leveraging nearly a decade of experience, I founded DT7 Solutions, offering cutting-edge digital services such as website development, social media management, and e-commerce solutions across platforms like Amazon. Our mission is to empower clients with innovative strategies to enhance their online presence and drive business growth. Following the tremendous success of DT7 Solutions.
+              My career began in 2013 as a junior developer, where I cultivated a deep passion for software engineering, database management, and cloud architecture. Over the next decade, I immersed myself in complex technical ecosystems and leadership roles, mastering the art of building scalable enterprise systems. Driven by a vision to deliver cutting-edge digital transformations, I founded DT7 Solutions in 2022. Our mission is to engineer high-impact web architectures, optimize e-commerce operations, and deploy state-of-the-art cloud infrastructure that empowers modern enterprises to thrive in a digital-first economy.
             </p>
 
             {/* Bio paragraph 2 */}
@@ -527,7 +553,7 @@ function About() {
               className="text-[15px] md:text-[16px] leading-relaxed text-[#0c0f22]"
               style={{ fontFamily: "'Poppins', sans-serif", fontWeight: 300 }}
             >
-              I expanded my entrepreneurial ventures by establishing DT7 Agency, where we focus on designing, digital marketing, branding, and crafting innovative strategies to amplify business growth. In addition to my entrepreneurial endeavors, I am also a Managing Partner at Sri Sainadh, Frosinn Rocha, Alanati Ruchulu and NR Constructions.
+              Building on the success of DT7 Solutions, I expanded my entrepreneurial footprint by establishing DT7 Agency—a full-service creative powerhouse specializing in brand design, strategic digital marketing, and business growth acceleration. Beyond my core technology ventures, I serve as Managing Partner for several successful enterprises across diverse industries, including Sri Sainadh, Frosinn Rocha, Alanati Ruchulu, and NR Constructions.
             </p>
 
             {/* Signature — dark rectangle masked by the signature image */}
@@ -555,30 +581,82 @@ function About() {
     </section>
   );
 }
-
-// ─── EXPERIENCE ───────────────────────────────────────────────────────────────
-
-// Horizontal dashed arrow (→ or ←)
-function HDash({ flip = false }: { flip?: boolean }) {
+function HDash({ flip = false, delay = 0 }: { flip?: boolean; delay?: number }) {
+  const ref = useRef(null);
+  const inView = useInView(ref, { once: true, margin: "-80px" });
   return (
-    <div className="hidden lg:flex items-center justify-center w-full">
+    <div ref={ref} className="hidden lg:flex items-center justify-center w-full">
       <svg width="160" height="16" viewBox="0 0 160 16" fill="none" style={{ transform: flip ? "scaleX(-1)" : "none" }}>
-        <line x1="2" y1="8" x2="148" y2="8" stroke="#c0c0c0" strokeWidth="1" strokeDasharray="4 4" strokeLinecap="round" />
-        <line x1="140" y1="3" x2="152" y2="8" stroke="#c0c0c0" strokeWidth="1" strokeLinecap="round" />
-        <line x1="140" y1="13" x2="152" y2="8" stroke="#c0c0c0" strokeWidth="1" strokeLinecap="round" />
+        {/* Background track line */}
+        <line x1="2" y1="8" x2="148" y2="8" stroke="#e5e5e5" strokeWidth="1" strokeDasharray="4 4" strokeLinecap="round" />
+        {/* Drawing line */}
+        <motion.line
+          x1="2"
+          y1="8"
+          x2="148"
+          y2="8"
+          stroke="#f09800"
+          strokeWidth="1.5"
+          strokeDasharray="4 4"
+          strokeLinecap="round"
+          initial={{ pathLength: 0 }}
+          animate={inView ? { pathLength: 1 } : {}}
+          transition={{ duration: 0.8, delay, ease: "easeOut" }}
+        />
+        {/* Background arrow head */}
+        <path d="M140 3 L152 8 L140 13" stroke="#e5e5e5" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" />
+        {/* Drawing arrow head */}
+        <motion.path
+          d="M140 3 L152 8 L140 13"
+          stroke="#f09800"
+          strokeWidth="1.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          initial={{ opacity: 0 }}
+          animate={inView ? { opacity: 1 } : {}}
+          transition={{ duration: 0.2, delay: delay + 0.6 }}
+        />
       </svg>
     </div>
   );
 }
 
 // Vertical dashed down arrow
-function VDash() {
+function VDash({ delay = 0 }: { delay?: number }) {
+  const ref = useRef(null);
+  const inView = useInView(ref, { once: true, margin: "-80px" });
   return (
-    <div className="hidden lg:flex justify-center items-center" style={{ height: 80 }}>
+    <div ref={ref} className="hidden lg:flex justify-center items-center" style={{ height: 80 }}>
       <svg width="16" height="80" viewBox="0 0 16 80" fill="none">
-        <line x1="8" y1="2" x2="8" y2="66" stroke="#c0c0c0" strokeWidth="1" strokeDasharray="4 4" strokeLinecap="round" />
-        <line x1="3" y1="58" x2="8" y2="70" stroke="#c0c0c0" strokeWidth="1" strokeLinecap="round" />
-        <line x1="13" y1="58" x2="8" y2="70" stroke="#c0c0c0" strokeWidth="1" strokeLinecap="round" />
+        {/* Background track */}
+        <line x1="8" y1="2" x2="8" y2="66" stroke="#e5e5e5" strokeWidth="1.5" strokeDasharray="4 4" strokeLinecap="round" />
+        {/* Drawing line */}
+        <motion.line
+          x1="8"
+          y1="2"
+          x2="8"
+          y2="66"
+          stroke="#f09800"
+          strokeWidth="1.5"
+          strokeDasharray="4 4"
+          strokeLinecap="round"
+          initial={{ pathLength: 0 }}
+          animate={inView ? { pathLength: 1 } : {}}
+          transition={{ duration: 0.6, delay, ease: "easeOut" }}
+        />
+        {/* Background arrow head */}
+        <path d="M3 58 L8 70 L13 58" stroke="#e5e5e5" strokeLinecap="round" strokeLinejoin="round" />
+        {/* Drawing arrow head */}
+        <motion.path
+          d="M3 58 L8 70 L13 58"
+          stroke="#f09800"
+          strokeWidth="1.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          initial={{ opacity: 0 }}
+          animate={inView ? { opacity: 1 } : {}}
+          transition={{ duration: 0.2, delay: delay + 0.4 }}
+        />
       </svg>
     </div>
   );
@@ -586,19 +664,44 @@ function VDash() {
 
 // Single experience card
 function ExpCard({
-  period, role, desc, bg, delay = 0,
+  period, role, desc, bg, delay = 0, side = "left"
 }: {
-  period: string; role: string; desc: string; bg: string; delay?: number;
+  period: string; role: string; desc: string; bg: string; delay?: number; side?: "left" | "right";
 }) {
+  const ref = useRef(null);
+  const inView = useInView(ref, { once: true, margin: "-100px" });
+
   return (
-    <Reveal delay={delay}>
-      <div
+    <div ref={ref} className="relative w-full">
+      {/* Timeline Node dot (desktop) */}
+      <motion.div
+        initial={{ scale: 0 }}
+        animate={inView ? { scale: 1 } : {}}
+        transition={{ type: "spring", stiffness: 200, damping: 15, delay: delay + 0.2 }}
+        className={`absolute hidden lg:block w-4 h-4 rounded-full bg-[#f09800] border-4 border-white shadow-md z-20 top-1/2 -translate-y-1/2 ${
+          side === "left" ? "right-[-10px]" : "left-[-10px]"
+        }`}
+      />
+
+      {/* Timeline Node dot (mobile) */}
+      <motion.div
+        initial={{ scale: 0 }}
+        animate={inView ? { scale: 1 } : {}}
+        transition={{ type: "spring", stiffness: 200, damping: 15, delay: delay + 0.2 }}
+        className="absolute lg:hidden w-3.5 h-3.5 rounded-full bg-[#f09800] border-2 border-white shadow-sm z-20 left-[-24px] top-6"
+      />
+
+      <motion.div
+        initial={{ opacity: 0, x: side === "left" ? -40 : 40, y: 10 }}
+        animate={inView ? { opacity: 1, x: 0, y: 0 } : {}}
+        transition={{ duration: 0.7, delay, ease: [0.22, 1, 0.36, 1] }}
         style={{
           background: bg,
           borderRadius: 20,
           padding: "24px 24px 28px 24px",
           minHeight: 178,
         }}
+        className="shadow-sm hover:shadow-md transition-shadow duration-300"
       >
         {/* Top row: role title + date pill */}
         <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 12, marginBottom: 16 }}>
@@ -649,12 +752,18 @@ function ExpCard({
         >
           {desc}
         </p>
-      </div>
-    </Reveal>
+      </motion.div>
+    </div>
   );
 }
 
 function Experience() {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start end", "end end"]
+  });
+
   return (
     <section id="experience" className="bg-white py-16 md:py-24">
       <div className="max-w-[1440px] mx-auto px-6 md:px-[150px]">
@@ -673,7 +782,7 @@ function Experience() {
                   marginBottom: 8,
                 }}
               >
-                Experience My Professional Evolution
+                My Professional Evolution
               </h2>
               <p
                 style={{
@@ -683,7 +792,7 @@ function Experience() {
                   color: "#0a1422",
                 }}
               >
-                A Journey of Leadership Innovation &amp; Growth
+                A decade-long trajectory of building clean code, architecting resilient systems, and leading high-performing teams.
               </p>
             </div>
 
@@ -699,61 +808,65 @@ function Experience() {
           </div>
         </Reveal>
 
-        {/* ── Snake grid ──
-            ROW 1: Left → Right
-            GAP:         ↓ (right side)
-            ROW 2: Left ← Right
-            GAP:  ↓ (left side)
-            ROW 3: Left → Right
-        */}
+        {/* ── Snake grid / Timeline wrapper ── */}
+        <div ref={containerRef} className="relative pl-7 lg:pl-0">
+          
+          {/* Mobile vertical timeline line */}
+          <div className="absolute left-[11px] lg:hidden top-2 bottom-2 w-[2px] bg-[#e5e5e5]">
+            <motion.div
+              style={{ scaleY: scrollYProgress, transformOrigin: "top" }}
+              className="absolute inset-0 bg-[#f09800]"
+            />
+          </div>
 
-        {/* ROW 1 */}
-        <div className="grid grid-cols-1 lg:grid-cols-[1fr_180px_1fr] items-center gap-y-4 lg:gap-y-0">
-          <ExpCard period="2013 - 2015" role="Junior Developer"
-            desc="Gained foundational programming skills and worked on smaller project components."
-            bg="rgba(201,217,253,0.5)" delay={0} />
-          <HDash flip={false} />
-          <ExpCard period="2015 - 2016" role="Senior Developer"
-            desc="Took ownership of critical development tasks and mentored junior team members."
-            bg="rgba(254,201,203,0.5)" delay={0.1} />
+          {/* ROW 1 */}
+          <div className="grid grid-cols-1 lg:grid-cols-[1fr_180px_1fr] items-center gap-y-6 lg:gap-y-0">
+            <ExpCard period="2013 - 2015" role="Junior Developer"
+              desc="Gained deep foundational knowledge in engineering principles, database structures, and software lifecycles while delivering high-quality modules."
+              bg="rgba(201,217,253,0.5)" delay={0} side="left" />
+            <HDash flip={false} delay={0.2} />
+            <ExpCard period="2015 - 2016" role="Senior Developer"
+              desc="Led the design of critical application features, oversaw systems integration, and mentored junior engineers to foster a collaborative code culture."
+              bg="rgba(254,201,203,0.5)" delay={0.4} side="right" />
+          </div>
+
+          {/* After row 1: ↓ arrow on RIGHT column */}
+          <div className="hidden lg:grid grid-cols-[1fr_180px_1fr]">
+            <div />
+            <div />
+            <VDash delay={0.6} />
+          </div>
+
+          {/* ROW 2 */}
+          <div className="grid grid-cols-1 lg:grid-cols-[1fr_180px_1fr] items-center gap-y-6 lg:gap-y-0 mt-6 lg:mt-0">
+            <ExpCard period="2017 - 2019" role="Team Leader"
+              desc="Spearheaded cross-functional engineering teams, aligning technical deliverables with agile execution and design excellence."
+              bg="rgba(254,191,220,0.5)" delay={0.4} side="left" />
+            <HDash flip={true} delay={0.2} />
+            <ExpCard period="2016 - 2017" role="Database Engineer"
+              desc="Architected robust database schemas, optimized complex queries, and ensured absolute data integrity, security, and high availability."
+              bg="rgba(224,251,202,0.5)" delay={0} side="right" />
+          </div>
+
+          {/* After row 2: ↓ arrow on LEFT column */}
+          <div className="hidden lg:grid grid-cols-[1fr_180px_1fr]">
+            <VDash delay={0.6} />
+            <div />
+            <div />
+          </div>
+
+          {/* ROW 3 */}
+          <div className="grid grid-cols-1 lg:grid-cols-[1fr_180px_1fr] items-center gap-y-6 lg:gap-y-0 mt-6 lg:mt-0">
+            <ExpCard period="2019 - 2021" role="Project Manager"
+              desc="Managed end-to-end project lifecycles, mitigated delivery risks, and ensured seamless communication between stakeholders and technical teams."
+              bg="rgba(208,253,232,0.5)" delay={0} side="left" />
+            <HDash flip={false} delay={0.2} />
+            <ExpCard period="2021 - 2022" role="AWS Architecture"
+              desc="Designed and deployed highly resilient, secure, and cost-efficient cloud infrastructures using modern AWS best practices."
+              bg="rgba(189,252,246,0.5)" delay={0.4} side="right" />
+          </div>
+
         </div>
-
-        {/* After row 1: ↓ arrow on RIGHT column */}
-        <div className="hidden lg:grid grid-cols-[1fr_180px_1fr]">
-          <div />
-          <div />
-          <VDash />
-        </div>
-
-        {/* ROW 2 */}
-        <div className="grid grid-cols-1 lg:grid-cols-[1fr_180px_1fr] items-center gap-y-4 lg:gap-y-0 mt-4 lg:mt-0">
-          <ExpCard period="2017 - 2019" role="Team Leader"
-            desc="Directed a team of developers, balancing technical guidance with collaboration."
-            bg="rgba(254,191,220,0.5)" delay={0.1} />
-          <HDash flip={true} />
-          <ExpCard period="2016 - 2017" role="Database Engineer"
-            desc="Managed database systems, ensuring data integrity and performance optimization."
-            bg="rgba(224,251,202,0.5)" delay={0.2} />
-        </div>
-
-        {/* After row 2: ↓ arrow on LEFT column */}
-        <div className="hidden lg:grid grid-cols-[1fr_180px_1fr]">
-          <VDash />
-          <div />
-          <div />
-        </div>
-
-        {/* ROW 3 */}
-        <div className="grid grid-cols-1 lg:grid-cols-[1fr_180px_1fr] items-center gap-y-4 lg:gap-y-0 mt-4 lg:mt-0">
-          <ExpCard period="2019 - 2021" role="Project Manager"
-            desc="Oversaw project planning, execution, and delivery ensuring alignment with client goals."
-            bg="rgba(208,253,232,0.5)" delay={0.2} />
-          <HDash flip={false} />
-          <ExpCard period="2021 - 2022" role="AWS Architecture"
-            desc="Designed scalable, secure, and cost-effective cloud solutions using AWS services."
-            bg="rgba(189,252,246,0.5)" delay={0.3} />
-        </div>
-
       </div>
     </section>
   );
@@ -765,7 +878,7 @@ const EDUCATION_DATA = [
     id: 1,
     category: "Post Graduation",
     title: "IIM Visakhapatnam",
-    description: "I am thrilled that I completed my Post Graduation in Digital Marketing and Growth from IIM Visakhapatnam. This program has sharpened my digital marketing expertise, empowering me to drive growth in the digital era.",
+    description: "Completed post-graduate studies in Digital Marketing & Growth, mastering performance marketing, brand communication strategies, and data-driven customer acquisition models to drive scalable digital growth.",
     image: imgIimSpeech,
     filter: "none",
   },
@@ -773,7 +886,7 @@ const EDUCATION_DATA = [
     id: 2,
     category: "Professional Network",
     title: "BNI Guntur",
-    description: "I am proud to be a member of BNI Guntur, a vibrant network of business professionals. Being part of this community has enhanced my networking skills and opened new avenues for collaboration.",
+    description: "Active member of BNI Guntur, collaborating with an elite network of business leaders and entrepreneurs to foster strategic partnerships and referral-driven business growth.",
     image: imgBniMember,
     filter: "none",
   },
@@ -781,7 +894,7 @@ const EDUCATION_DATA = [
     id: 3,
     category: "Service & Leadership",
     title: "Rotary Club",
-    description: "Honored to be a member of the Rotary Club, a global community dedicated to service and leadership. Being part of this esteemed group inspires me to contribute meaningfully to society and foster impactful connections.",
+    description: "Dedicated member committed to global humanitarian service, fostering community development, and driving positive local impact through structured social responsibility initiatives.",
     image: imgEntrepreneurAwardBadge,
     filter: "none",
   }
@@ -824,7 +937,7 @@ function Education() {
             className="text-[28px] md:text-[40px] font-medium text-[#0a1422] leading-snug text-center mx-auto"
             style={{ fontFamily: "'Afacad Flux', sans-serif", maxWidth: 591 }}
           >
-            Built on Education Defined by Honour Driven by Purpose
+            Academic Foundations &amp; Strategic Partnerships
           </h2>
         </Reveal>
 
@@ -1000,7 +1113,7 @@ const AWARDS_DATA = [
     year: "2024",
     title: "IIM Certificate",
     issuer: "IIM Visakhapatnam",
-    description: "Completed the Post Graduation in Digital Marketing and Growth from IIM Visakhapatnam.",
+    description: "Post Graduate Program in Digital Marketing &amp; Growth, showcasing specialized expertise in brand scale and online execution.",
     image: imgIimCertificate,
     color: "#5e4080", // Purple
   },
@@ -1009,7 +1122,7 @@ const AWARDS_DATA = [
     year: "2023",
     title: "Skill Nation Certificate",
     issuer: "Skill Nation",
-    description: "Skill Nation Certificate for WhatsApp Marketing & Automation, showcasing expertise in marketing strategies.",
+    description: "Advanced certification in WhatsApp Marketing &amp; Automated Systems, implementing workflows that optimize user engagement and conversion.",
     image: imgSkillNationCertificate,
     color: "#373758", // Dark Blue
   },
@@ -1018,7 +1131,7 @@ const AWARDS_DATA = [
     year: "2023",
     title: "J Connect Certificate",
     issuer: "J Connect",
-    description: "J Connect Certificate for New Age Digital Marketing, recognizing expertise in modern digital strategies.",
+    description: "Recognized for mastery in new-age digital marketing frameworks and contemporary multi-channel audience engagement.",
     image: imgJConnectCertificate,
     color: "#f09800", // Orange
   }
@@ -1038,6 +1151,17 @@ function Awards() {
     setIsAnimating(true);
   };
 
+  const handlePrev = () => {
+    if (isAnimating) return;
+    setCards((prev) => {
+      const [first, ...rest] = prev;
+      return [...rest, first];
+    });
+    setTimeout(() => {
+      setIsAnimating(true);
+    }, 50);
+  };
+
   const handleAnimationComplete = (id: number) => {
     if (id === cards[0].id) {
       setCards((prev) => {
@@ -1048,30 +1172,11 @@ function Awards() {
     }
   };
 
-  const handleDotClick = (targetOriginalIdx: number) => {
-    if (isAnimating) return;
-    const targetId = AWARDS_DATA[targetOriginalIdx].id;
-    const currentIdx = cards.findIndex((c) => c.id === targetId);
-    if (currentIdx === 0) return;
-
-    if (currentIdx === 1) {
-      setIsAnimating(true);
-    } else if (currentIdx === 2) {
-      setCards((prev) => {
-        const [first, ...rest] = prev;
-        return [...rest, first];
-      });
-      setTimeout(() => {
-        setIsAnimating(true);
-      }, 50);
-    }
-  };
-
   useEffect(() => {
     if (isHovered || isAnimating) return;
     const timer = setInterval(() => {
       handleNext();
-    }, 5000);
+    }, 2000);
     return () => clearInterval(timer);
   }, [cards, isAnimating, isHovered]);
 
@@ -1088,7 +1193,7 @@ function Awards() {
                 fontFamily: "'Afacad Flux', sans-serif", fontWeight: 500, fontSize: 20,
                 color: "white", marginBottom: 6, whiteSpace: "nowrap",
               }}>
-                My Journey My Achievements
+                Milestones of Excellence
               </p>
               {/* Orange + white lines flush beneath the text, no gap */}
               <div style={{ display: "flex", gap: 8 }}>
@@ -1135,8 +1240,8 @@ function Awards() {
                   }
                 }
 
-                // Show details only on the top active card, fade out on inactive cards
-                const isTopActive = idx === 0 && !isAnimating;
+                // Show details on top card (index 0) when idle, or the next card (index 1) during transition to avoid blank delay
+                const isTopActive = isAnimating ? idx === 1 : idx === 0;
 
                 return (
                   <motion.div
@@ -1148,7 +1253,7 @@ function Awards() {
                         handleAnimationComplete(card.id);
                       }
                     }}
-                    transition={{ duration: 0.6, ease: [0.25, 1, 0.5, 1] }}
+                    transition={{ duration: 0.6, ease: [0.25, 1, 0.36, 1] }}
                     style={{
                       position: "absolute",
                       left: 0,
@@ -1162,7 +1267,7 @@ function Awards() {
                   >
                     <motion.div
                       animate={{ opacity: isTopActive ? 1 : 0 }}
-                      transition={{ duration: 0.3 }}
+                      transition={{ duration: 0.4 }}
                       className="flex flex-col items-center justify-between h-full py-8 px-6 text-center select-none"
                     >
                       {/* Year */}
@@ -1209,33 +1314,36 @@ function Awards() {
             </div>
           </Reveal>
 
-          {/* ── RIGHT: dots + heading ── */}
+          {/* ── RIGHT: arrows + heading ── */}
           <Reveal delay={0.15} className="flex-1 flex flex-col items-start md:pl-16">
-            {/* Dots */}
-            <div className="flex gap-2.5 mb-5">
-              {AWARDS_DATA.map((award, originalIdx) => {
-                const isActive = cards[0].id === award.id;
-                return (
-                  <button
-                    key={award.id}
-                    onClick={() => handleDotClick(originalIdx)}
-                    className="w-3.5 h-3.5 rounded-full transition-all duration-300 cursor-pointer"
-                    style={{
-                      background: isActive ? "white" : "#5a5a5a",
-                      transform: isActive ? "scale(1.2)" : "scale(1)",
-                      border: "none",
-                      outline: "none",
-                    }}
-                    aria-label={`Go to slide ${originalIdx + 1}`}
-                  />
-                );
-              })}
+            {/* Navigation Arrows */}
+            <div className="flex gap-4 mb-6">
+              <button
+                onClick={handlePrev}
+                className="w-11 h-11 rounded-full flex items-center justify-center border border-white/20 text-white hover:bg-[#f09800] hover:border-[#f09800] hover:scale-105 active:scale-95 transition-all duration-300 cursor-pointer"
+                aria-label="Previous Slide"
+              >
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <line x1="19" y1="12" x2="5" y2="12"></line>
+                  <polyline points="12 19 5 12 12 5"></polyline>
+                </svg>
+              </button>
+              <button
+                onClick={handleNext}
+                className="w-11 h-11 rounded-full flex items-center justify-center border border-white/20 text-white hover:bg-[#f09800] hover:border-[#f09800] hover:scale-105 active:scale-95 transition-all duration-300 cursor-pointer"
+                aria-label="Next Slide"
+              >
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                  <polyline points="12 5 19 12 12 19"></polyline>
+                </svg>
+              </button>
             </div>
             <h3 style={{
               fontFamily: "'Afacad Flux', sans-serif", fontWeight: 500,
               fontSize: "clamp(28px, 2.78vw, 40px)", color: "white", lineHeight: 1.25,
             }}>
-              Professional Awards Achieved Through My Journey
+              Distinctions earned through dedicated innovation, constant skill evolution, and architectural excellence.
             </h3>
           </Reveal>
 
@@ -1288,9 +1396,9 @@ function Enterprises() {
   ];
 
   const STATS = [
-    { value: "11+", label: "Years of Expertise" },
-    { value: "06", label: "Thriving Businesses" },
-    { value: "150+", label: "Satisfied Clients" },
+    { value: "11+", label: "Years of Technical & Business Innovation" },
+    { value: "06", label: "Active Ventures Founded or Managed" },
+    { value: "150+", label: "Global Clients Empowered" },
   ];
 
   const gridW = CW * 6;
@@ -1301,7 +1409,7 @@ function Enterprises() {
       <div className="max-w-[1440px] mx-auto px-6 md:px-[150px]">
         <Reveal className="text-center mb-14">
           <h2 style={{ fontFamily: "'Afacad Flux', sans-serif", fontWeight: 500, fontSize: "clamp(28px,2.78vw,40px)", color: "#0a1422" }}>
-            My Enterprises - Achievements
+            Ventures &amp; Impact
           </h2>
         </Reveal>
 
@@ -1341,32 +1449,46 @@ function Enterprises() {
           </Reveal>
 
           {/* ── Stats ── */}
-          <Reveal delay={0.15} className="w-full lg:w-[380px] lg:flex-shrink-0 flex flex-col items-center lg:items-start justify-center gap-8 md:gap-12 pt-8">
-            {STATS.map((stat) => (
-              <div key={stat.label} className="flex items-center gap-6">
-                {/* Large number */}
-                <span style={{
-                  fontFamily: "'Afacad Flux', sans-serif", fontWeight: 600,
-                  fontSize: "clamp(40px,3.47vw,50px)", color: "#0a1422",
-                  minWidth: 90, display: "inline-block",
-                }}>
-                  {stat.value}
-                </span>
-                {/* Orange gradient line */}
-                <div style={{
-                  width: 92, height: 2, flexShrink: 0,
-                  background: "linear-gradient(to right, #f09800, #8a5700)",
-                }} />
-                {/* Label */}
-                <span style={{
-                  fontFamily: "'Afacad Flux', sans-serif", fontWeight: 400,
-                  fontSize: 18, color: "#707070",
-                }}>
-                  {stat.label}
-                </span>
-              </div>
-            ))}
-          </Reveal>
+          {/* ── Stats ── */}
+          <div className="w-full lg:w-[380px] lg:flex-shrink-0 flex flex-col items-center lg:items-start justify-center gap-8 md:gap-12 pt-8 overflow-visible">
+            {STATS.map((stat, idx) => {
+              return (
+                <RevealRight
+                  key={stat.label}
+                  delay={idx * 0.15}
+                  xOffset={100}
+                  className="w-full flex items-center"
+                >
+                  <motion.div
+                    className="flex items-center gap-6 w-full cursor-pointer"
+                    whileHover={{ x: 12, scale: 1.03 }}
+                    transition={{ type: "spring", stiffness: 200, damping: 15 }}
+                  >
+                    {/* Large number */}
+                    <span style={{
+                      fontFamily: "'Afacad Flux', sans-serif", fontWeight: 600,
+                      fontSize: "clamp(40px,3.47vw,50px)", color: "#0a1422",
+                      minWidth: 140, display: "inline-block",
+                    }}>
+                      {stat.value}
+                    </span>
+                    {/* Orange gradient line */}
+                    <div style={{
+                      width: 92, height: 2, flexShrink: 0,
+                      background: "linear-gradient(to right, #f09800, #8a5700)",
+                    }} />
+                    {/* Label */}
+                    <span style={{
+                      fontFamily: "'Afacad Flux', sans-serif", fontWeight: 400,
+                      fontSize: 18, color: "#707070",
+                    }}>
+                      {stat.label}
+                    </span>
+                  </motion.div>
+                </RevealRight>
+              );
+            })}
+          </div>
 
         </div>
       </div>
@@ -1377,14 +1499,15 @@ function Enterprises() {
 
 // ─── TESTIMONIALS ─────────────────────────────────────────────────────────────
 const T_CARDS = [
-  { quote: `"Working with Dinesh Alla was a fantastic experience. He is innovative, approachable, and highly professional. The results were beyond our expectations. "`, name: "Phani kumar", company: "Dharani Info Technologies Pvt. Ltd", logo: imgImage28 },
-  { quote: `"Working with Dinesh Alla was a fantastic experience. He is innovative, approachable, and highly professional. The results were beyond our expectations. "`, name: "Phani kumar", company: "Dharani Info Technologies Pvt. Ltd", logo: imgImage27 },
-  { quote: `"Working with Dinesh Alla was a fantastic experience. He is innovative, approachable, and highly professional. The results were beyond our expectations. "`, name: "Phani kumar", company: "Dharani Info Technologies Pvt. Ltd", logo: imgImage29 },
-  { quote: `"Working with Dinesh Alla was a fantastic experience. He is innovative, approachable, and highly professional. The results were beyond our expectations. "`, name: "Phani kumar", company: "Dharani Info Technologies Pvt. Ltd", logo: imgImage28 },
+  { quote: `\"Working with Dinesh Alla was a masterclass in digital transformation. His dual expertise in AWS cloud architecture and modern web design completely modernized our product delivery pipeline. The efficiency gains exceeded all of our targets.\"`, name: "Phani kumar", company: "Dharani Info Technologies Pvt. Ltd", logo: imgImage28 },
+  { quote: `\"Dinesh is a highly strategic leader. DT7 Agency transformed our brand presence and scaled our digital acquisition campaigns. His approach is data-driven and results-oriented.\"`, name: "Phani kumar", company: "Dharani Info Technologies Pvt. Ltd", logo: imgImage27 },
+  { quote: `\"The e-commerce and web strategies implemented by Dinesh's team at DT7 Solutions enabled us to scale our Amazon and standalone web stores smoothly. His technical execution is top-tier.\"`, name: "Phani kumar", company: "Dharani Info Technologies Pvt. Ltd", logo: imgImage29 },
+  { quote: `\"As a managing partner across several ventures, Dinesh brings absolute clarity, operational discipline, and technical depth. He's an invaluable partner for any high-growth enterprise.\"`, name: "Phani kumar", company: "Dharani Info Technologies Pvt. Ltd", logo: imgImage28 },
 ];
 
 function Testimonials() {
   const [activeT, setActiveT] = useState(0);
+  const [hoveredIdx, setHoveredIdx] = useState<number | null>(null);
 
   const handlePrevT = () => {
     setActiveT((prev) => (prev - 1 + T_CARDS.length) % T_CARDS.length);
@@ -1393,6 +1516,8 @@ function Testimonials() {
   const handleNextT = () => {
     setActiveT((prev) => (prev + 1) % T_CARDS.length);
   };
+
+  const isMarqueePaused = hoveredIdx !== null;
 
   return (
     <section id="testimonials" className="bg-white pb-16 md:pb-24">
@@ -1405,56 +1530,85 @@ function Testimonials() {
             fontSize: "clamp(22px, 2.36vw, 34px)", color: "#0a1422",
             maxWidth: 753, margin: "0 auto", paddingTop: 48,
           }}>
-            Voices That Validate Our Vision - Where Client Experiences Inspire Our Future.
+            Client Stories — Building Trust and Delivering Real Value.
           </h2>
         </Reveal>
       </div>
 
       {/* DESKTOP marquee — hidden on mobile, visible on desktop */}
       <div className="hidden md:block" style={{ overflow: "hidden", width: "100%" }}>
-        <motion.div
-          animate={{ x: ["-430px", "-2030px"] }}
-          transition={{ duration: 25, repeat: Infinity, ease: "linear", repeatType: "loop" }}
-          style={{ display: "flex", gap: 20, width: "max-content" }}
+        <style>{`
+          @keyframes marquee {
+            0% { transform: translateX(-430px); }
+            100% { transform: translateX(-2030px); }
+          }
+          .animate-marquee {
+            animation: marquee 25s linear infinite;
+          }
+          .animate-marquee:hover {
+            animation-play-state: paused;
+          }
+        `}</style>
+        <div
+          className="animate-marquee"
+          style={{
+            display: "flex",
+            gap: 20,
+            width: "max-content",
+          }}
         >
           {/* Duplicate cards for seamless infinite loop */}
-          {[...T_CARDS, ...T_CARDS].map((t, i) => (
-            <div key={i} style={{
-              background: "#f3f8ff",
-              border: "1px solid #e5e5e5",
-              borderRadius: 10,
-              width: 560,
-              flexShrink: 0,
-              padding: "31px 32px 28px 32px",
-              display: "flex",
-              flexDirection: "column",
-            }}>
-              {/* Quote */}
-              <p style={{
-                fontFamily: "'Afacad Flux', sans-serif", fontWeight: 300,
-                fontSize: 22, color: "#0a1422", lineHeight: 1.45,
-                flex: 1, marginBottom: 20,
-              }}>
-                {t.quote}
-              </p>
+          {[...T_CARDS, ...T_CARDS].map((t, i) => {
+            const isHovered = hoveredIdx === i;
+            const isAnyHovered = hoveredIdx !== null;
+            return (
+              <div
+                key={i}
+                onMouseEnter={() => setHoveredIdx(i)}
+                onMouseLeave={() => setHoveredIdx(null)}
+                style={{
+                  background: isHovered ? "white" : "#f3f8ff",
+                  border: isHovered ? "1px solid #f09800" : "1px solid #e5e5e5",
+                  borderRadius: 10,
+                  width: 560,
+                  flexShrink: 0,
+                  padding: "31px 32px 28px 32px",
+                  display: "flex",
+                  flexDirection: "column",
+                  boxShadow: isHovered ? "0 20px 40px rgba(240,152,0,0.15)" : "none",
+                  transform: isHovered ? "scale(1.03)" : "scale(1)",
+                  opacity: isAnyHovered && !isHovered ? 0.5 : 1,
+                  transition: "all 0.4s cubic-bezier(0.25, 1, 0.5, 1)",
+                  cursor: "pointer",
+                }}
+              >
+                {/* Quote */}
+                <p style={{
+                  fontFamily: "'Afacad Flux', sans-serif", fontWeight: 300,
+                  fontSize: 22, color: "#0a1422", lineHeight: 1.45,
+                  flex: 1, marginBottom: 20,
+                }}>
+                  {t.quote}
+                </p>
 
-              {/* Bottom: name+company LEFT, logo RIGHT */}
-              <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 12 }}>
-                <div>
-                  <p style={{ fontFamily: "'Afacad Flux', sans-serif", fontWeight: 600, fontSize: 28, color: "#0a1422", margin: 0 }}>
-                    {t.name}
-                  </p>
-                  <p style={{ fontFamily: "'Afacad Flux', sans-serif", fontWeight: 400, fontSize: 18, color: "#0a1422", margin: 0 }}>
-                    {t.company}
-                  </p>
-                </div>
-                <div style={{ width: 72, height: 60, background: "white", borderRadius: 8, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
-                  <img src={t.logo} alt={t.name} style={{ maxWidth: "80%", maxHeight: "80%", objectFit: "contain", pointerEvents: "none" }} />
+                {/* Bottom: name+company LEFT, logo RIGHT */}
+                <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 12 }}>
+                  <div>
+                    <p style={{ fontFamily: "'Afacad Flux', sans-serif", fontWeight: 600, fontSize: 28, color: "#0a1422", margin: 0 }}>
+                      {t.name}
+                    </p>
+                    <p style={{ fontFamily: "'Afacad Flux', sans-serif", fontWeight: 400, fontSize: 18, color: "#0a1422", margin: 0 }}>
+                      {t.company}
+                    </p>
+                  </div>
+                  <div style={{ width: 72, height: 60, background: "white", borderRadius: 8, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
+                    <img src={t.logo} alt={t.name} style={{ maxWidth: "80%", maxHeight: "80%", objectFit: "contain", pointerEvents: "none" }} />
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
-        </motion.div>
+            );
+          })}
+        </div>
       </div>
 
       {/* MOBILE slider — visible on mobile, hidden on desktop */}
@@ -1612,7 +1766,7 @@ function Contact() {
                   <p style={{ fontFamily: "'Afacad Flux', sans-serif", fontWeight: 600, fontSize: 28, color: "#0a1422", margin: 0 }}>
                     Follow Now
                   </p>
-                  <div style={{ display: "flex", gap: 16 }}>
+                  <div style={{ display: "flex", gap: 16, alignItems: "center" }}>
                     <a href="https://instagram.com/" target="_blank" rel="noopener noreferrer">
                       <img src={imgImage18} alt="Instagram" style={{ width: 21, height: 21, objectFit: "cover" }} />
                     </a>
@@ -1621,6 +1775,11 @@ function Contact() {
                     </a>
                     <a href="https://linkedin.com/" target="_blank" rel="noopener noreferrer">
                       <img src={imgImage21} alt="LinkedIn" style={{ width: 21, height: 21, objectFit: "cover" }} />
+                    </a>
+                    <a href="https://wa.me/918885782778" target="_blank" rel="noopener noreferrer" title="Chat on WhatsApp" className="text-[#0a1422] hover:text-[#25D366] transition-colors duration-200">
+                      <svg width="22" height="21" viewBox="0 0 24 24" fill="currentColor" style={{ display: "block" }}>
+                        <path d="M12.012 2c-5.506 0-9.989 4.478-9.99 9.984a9.96 9.96 0 0 0 1.37 5.054L2 22l5.133-1.346a9.921 9.921 0 0 0 4.877 1.28h.005c5.505 0 9.989-4.478 9.99-9.985A9.972 9.972 0 0 0 12.012 2zm5.72 14.286c-.25.703-1.455 1.288-2.007 1.37-.5.074-1.153.13-3.32-.73-2.775-1.1-4.57-3.92-4.71-4.104-.13-.186-1.11-1.478-1.11-2.822 0-1.343.7-2.005.95-2.27.25-.264.55-.333.73-.333.18 0 .36 0 .52.01.17.01.4.03.62.53.22.52.76 1.86.83 2 .07.14.12.3.02.49-.09.19-.15.3-.3.47-.15.17-.32.39-.46.52-.16.15-.33.32-.14.65.18.3.83 1.36 1.77 2.2 1.22 1.09 2.24 1.43 2.56 1.59.32.16.51.13.7-.09.19-.22.82-.95 1.04-1.28.22-.32.44-.27.75-.16.3.11 1.93.91 2.26 1.08.33.16.55.24.63.38.08.14.08.82-.17 1.52z"/>
+                      </svg>
                     </a>
                   </div>
                 </div>
@@ -1636,17 +1795,30 @@ function Contact() {
             </h2>
             {/* Tagline */}
             <p style={{ fontFamily: "'Afacad Flux', sans-serif", fontWeight: 300, fontSize: 22, color: "#696969", marginBottom: 8 }}>
-              Your Digital Success Starts Here – Get in Touch!
+              Let's architect your digital future together. Reach out today.
             </p>
             {/* Address */}
             <p style={{ fontFamily: "'Afacad Flux', sans-serif", fontWeight: 400, fontSize: 18, color: "#0a1422", marginBottom: 4 }}>
               Dt7 Agency Pvt. Ltd. Chandramouli Nagar, Guntur, Andhra Pradesh - 522007, India
             </p>
-            <p style={{ fontFamily: "'Afacad Flux', sans-serif", fontWeight: 400, fontSize: 18, color: "#0a1422", marginBottom: 4 }}>+91 8885782778</p>
+            <p style={{ fontFamily: "'Afacad Flux', sans-serif", fontWeight: 400, fontSize: 18, color: "#0a1422", marginBottom: 4 }} className="flex items-center gap-2 justify-center md:justify-start">
+              <span>+91 8885782778</span>
+              <a
+                href="https://wa.me/918885782778"
+                target="_blank"
+                rel="noopener noreferrer"
+                title="Chat on WhatsApp"
+                className="inline-flex items-center text-[#25D366] hover:text-[#20ba56] transition-all duration-200 hover:scale-110"
+              >
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M12.012 2c-5.506 0-9.989 4.478-9.99 9.984a9.96 9.96 0 0 0 1.37 5.054L2 22l5.133-1.346a9.921 9.921 0 0 0 4.877 1.28h.005c5.505 0 9.989-4.478 9.99-9.985A9.972 9.972 0 0 0 12.012 2zm5.72 14.286c-.25.703-1.455 1.288-2.007 1.37-.5.074-1.153.13-3.32-.73-2.775-1.1-4.57-3.92-4.71-4.104-.13-.186-1.11-1.478-1.11-2.822 0-1.343.7-2.005.95-2.27.25-.264.55-.333.73-.333.18 0 .36 0 .52.01.17.01.4.03.62.53.22.52.76 1.86.83 2 .07.14.12.3.02.49-.09.19-.15.3-.3.47-.15.17-.32.39-.46.52-.16.15-.33.32-.14.65.18.3.83 1.36 1.77 2.2 1.22 1.09 2.24 1.43 2.56 1.59.32.16.51.13.7-.09.19-.22.82-.95 1.04-1.28.22-.32.44-.27.75-.16.3.11 1.93.91 2.26 1.08.33.16.55.24.63.38.08.14.08.82-.17 1.52z"/>
+                </svg>
+              </a>
+            </p>
             <p style={{ fontFamily: "'Afacad Flux', sans-serif", fontWeight: 400, fontSize: 18, color: "#0a1422", marginBottom: 24 }}>dineshalla@gmail.com</p>
             {/* Coffee quote */}
             <p style={{ fontFamily: "'Afacad Flux', sans-serif", fontWeight: 500, fontSize: 34, color: "#0a1422", marginBottom: 32, lineHeight: 1.3 }}>
-              Let's grab a coffee and jump on conversation chat with me.
+              Let's connect, share ideas, and explore how we can collaborate to elevate your business.
             </p>
 
             {status === "sent" ? (
@@ -1750,7 +1922,7 @@ function Footer() {
 // ─── APP ──────────────────────────────────────────────────────────────────────
 export default function App() {
   return (
-    <div className="bg-white min-h-screen" style={{ fontFamily: "'Poppins', sans-serif" }}>
+    <div className="bg-white min-h-screen relative" style={{ fontFamily: "'Poppins', sans-serif" }}>
       <style>{`
         * { box-sizing: border-box; }
         ::-webkit-scrollbar { width: 6px; }
@@ -1769,6 +1941,24 @@ export default function App() {
         <Contact />
       </main>
       <Footer />
+
+      {/* Floating WhatsApp Button */}
+      <a
+        href="https://wa.me/918885782778"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="fixed bottom-6 right-6 z-[999] flex items-center justify-center w-14 h-14 bg-[#25D366] rounded-full shadow-[0_4px_14px_rgba(37,211,102,0.4)] hover:bg-[#20ba56] hover:scale-110 active:scale-95 transition-all duration-300 group"
+        title="Chat on WhatsApp"
+        aria-label="Chat on WhatsApp"
+      >
+        <span className="absolute right-16 bg-[#0a1422] text-white text-xs font-semibold px-3 py-1.5 rounded-lg shadow-md opacity-0 translate-x-3 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300 whitespace-nowrap pointer-events-none" style={{ fontFamily: "'Poppins', sans-serif" }}>
+          Chat with us!
+        </span>
+        <span className="absolute inset-0 rounded-full bg-[#25D366] opacity-40 animate-ping pointer-events-none"></span>
+        <svg width="30" height="30" viewBox="0 0 24 24" fill="white" className="relative z-10">
+          <path d="M12.012 2c-5.506 0-9.989 4.478-9.99 9.984a9.96 9.96 0 0 0 1.37 5.054L2 22l5.133-1.346a9.921 9.921 0 0 0 4.877 1.28h.005c5.505 0 9.989-4.478 9.99-9.985A9.972 9.972 0 0 0 12.012 2zm5.72 14.286c-.25.703-1.455 1.288-2.007 1.37-.5.074-1.153.13-3.32-.73-2.775-1.1-4.57-3.92-4.71-4.104-.13-.186-1.11-1.478-1.11-2.822 0-1.343.7-2.005.95-2.27.25-.264.55-.333.73-.333.18 0 .36 0 .52.01.17.01.4.03.62.53.22.52.76 1.86.83 2 .07.14.12.3.02.49-.09.19-.15.3-.3.47-.15.17-.32.39-.46.52-.16.15-.33.32-.14.65.18.3.83 1.36 1.77 2.2 1.22 1.09 2.24 1.43 2.56 1.59.32.16.51.13.7-.09.19-.22.82-.95 1.04-1.28.22-.32.44-.27.75-.16.3.11 1.93.91 2.26 1.08.33.16.55.24.63.38.08.14.08.82-.17 1.52z"/>
+        </svg>
+      </a>
     </div>
   );
 }
