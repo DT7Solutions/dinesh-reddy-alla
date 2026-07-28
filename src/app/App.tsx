@@ -1719,11 +1719,13 @@ function Contact() {
           service_id: import.meta.env.VITE_EMAILJS_SERVICE_ID || "service_oqk9ebd",
           template_id: import.meta.env.VITE_EMAILJS_TEMPLATE_ID || "template_e34ayvr",
           user_id: import.meta.env.VITE_EMAILJS_PUBLIC_KEY || "Di159h43CNTx3xpQM",
+          ...(import.meta.env.VITE_EMAILJS_PRIVATE_KEY ? { accessToken: import.meta.env.VITE_EMAILJS_PRIVATE_KEY } : {}),
           template_params: {
-            from_name: form.name,
-            from_email: form.email,
-            reply_to: form.email,
+            name: form.name,
+            email: form.email,
             message: form.message,
+            title: `New Portfolio Message from ${form.name}`,
+            reply_to: form.email,
           },
         }),
       });
