@@ -21,6 +21,7 @@ import imgImage20 from "../imports/DineshAllaPortfolio/46c931e692faa9a20272963f8
 import imgImage21 from "../imports/DineshAllaPortfolio/61a2bcb7867173274ae582a3656738234db3a8ed.png";
 import imgSignature from "../imports/DineshAllaPortfolio/bc9c5a714f1df6f80d2ec01bae2bb5a0985cd65f.png";
 import imgLogo from "../imports/DineshAllaPortfolio/logo.jpeg";
+import LinkedInSection from "./components/LinkedInSection";
 // ─── Helpers ──────────────────────────────────────────────────────────────────
 function Reveal({
   children,
@@ -96,7 +97,7 @@ function CircleArrow() {
 }
 
 // ─── NAV ──────────────────────────────────────────────────────────────────────
-const NAV_LINKS = ["Home", "About", "Experience", "Awards", "Partners", "Testimonials"];
+const NAV_LINKS = ["Home", "About", "Experience", "Awards", "Partners", "LinkedIn", "Testimonials"];
 
 function Nav() {
   const [scrolled, setScrolled] = useState(false);
@@ -1791,7 +1792,7 @@ function Contact() {
                     <a href="https://facebook.com/" target="_blank" rel="noopener noreferrer">
                       <img src={imgImage20} alt="Facebook" style={{ width: 22, height: 21, objectFit: "cover" }} />
                     </a>
-                    <a href="https://linkedin.com/" target="_blank" rel="noopener noreferrer">
+                    <a href="https://www.linkedin.com/in/dineshalla/" target="_blank" rel="noopener noreferrer">
                       <img src={imgImage21} alt="LinkedIn" style={{ width: 21, height: 21, objectFit: "cover" }} />
                     </a>
                     <a href="https://wa.me/918885782778" target="_blank" rel="noopener noreferrer" title="Chat on WhatsApp" className="text-[#0a1422] hover:text-[#25D366] transition-colors duration-200">
@@ -1957,6 +1958,7 @@ export default function App() {
         <Education />
         <Awards />
         <Enterprises />
+        <LinkedInSection />
         <Testimonials />
         <Contact />
       </main>
