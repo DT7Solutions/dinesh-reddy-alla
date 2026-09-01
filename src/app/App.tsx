@@ -3,10 +3,6 @@ import { motion, useInView, useScroll } from "motion/react";
 import svgPaths from "../imports/DineshAllaPortfolio/svg-ux7tgka6em";
 import imgImage19 from "../imports/DineshAllaPortfolio/ae7ff146b4f0cd8702caa1b9b115640b9a811a06.png";
 import imgRectangle34 from "../imports/DineshAllaPortfolio/dfcb74d743d45e2b342af9f04c54f6ed74efd874.png";
-import imgArrow1 from "../imports/DineshAllaPortfolio/78169e50f6c898cb645ee892d7c8dd7082c396a9.png";
-import imgArrow3 from "../imports/DineshAllaPortfolio/78169e50f6c898cb645ee892d7c8dd7082c396a9.png";
-import imgArrow5 from "../imports/DineshAllaPortfolio/87311fc93eced249456d4e21ff54587b04ab3837.png";
-import imgArrow2 from "../imports/DineshAllaPortfolio/39311d50c40814cdebc014564a2c324135115f27.png";
 import imgIimCertificate from "../imports/DineshAllaPortfolio/iim_certificate.png";
 import imgSkillNationCertificate from "../imports/DineshAllaPortfolio/skill_nation_certificate.png";
 import imgJConnectCertificate from "../imports/DineshAllaPortfolio/j_connect_certificate.png";
@@ -24,9 +20,7 @@ import imgImage18 from "../imports/DineshAllaPortfolio/b3cdd2ceeff87513c3dfe606a
 import imgImage20 from "../imports/DineshAllaPortfolio/46c931e692faa9a20272963f83fb68b5c8946e3f.png";
 import imgImage21 from "../imports/DineshAllaPortfolio/61a2bcb7867173274ae582a3656738234db3a8ed.png";
 import imgSignature from "../imports/DineshAllaPortfolio/bc9c5a714f1df6f80d2ec01bae2bb5a0985cd65f.png";
-import imgRectangle54 from "../imports/DineshAllaPortfolio-1/adb596bdf7f04cf61b81e9316264b71422c8c6db.png";
-import imgRectangle55 from "../imports/DineshAllaPortfolio-1/5e13f4ac72fb20848ec70924bbf391eda493adcc.png";
-
+import imgLogo from "../imports/DineshAllaPortfolio/logo.jpeg";
 // ─── Helpers ──────────────────────────────────────────────────────────────────
 function Reveal({
   children,
@@ -102,7 +96,7 @@ function CircleArrow() {
 }
 
 // ─── NAV ──────────────────────────────────────────────────────────────────────
-const NAV_LINKS = ["Home", "About", "Experience", "Portfolio", "Awards", "Partners", "Testimonials"];
+const NAV_LINKS = ["Home", "About", "Experience", "Awards", "Partners", "Testimonials"];
 
 function Nav() {
   const [scrolled, setScrolled] = useState(false);
@@ -140,16 +134,20 @@ function Nav() {
           : "inset 0 1px 0 rgba(255,255,255,0.6)",
       }}
     >
-      <div className="max-w-[1440px] mx-auto px-6 md:px-10 h-[80px] flex items-center justify-between gap-4">
-        {/* Logo */}
+      <div className="max-w-[1440px] mx-auto px-6 md:px-10 h-[65px] flex items-center justify-between gap-4">
         <a
           href="#"
-          className="text-[28px] md:text-[34px] font-bold leading-none flex-shrink-0"
-          style={{ fontFamily: "'Afacad Flux', sans-serif" }}
-          onClick={(e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: "smooth" }); }}
+          className="flex items-center gap-3 flex-shrink-0"
+          onClick={(e) => {
+            e.preventDefault();
+            window.scrollTo({ top: 0, behavior: "smooth" });
+          }}
         >
-          <span style={{ color: "#0c0f22" }}>Dinesh</span>{" "}
-          <span style={{ color: "#f09800" }}>Alla</span>
+          <img
+            src={imgLogo}
+            alt="Alla Dinesh Logo"
+            className="h-[44px] md:h-[56px] w-auto object-contain"
+          />
         </a>
 
         {/* Desktop nav */}
@@ -262,14 +260,14 @@ function Hero() {
         className="text-center mt-8 text-[16px] md:text-[18px] text-[#0c0f22] px-4"
         style={{ fontFamily: "'Poppins', sans-serif", fontWeight: 300 }}
       >
-        Hello, I am Dinesh Alla — a forward-thinking technologist and entrepreneur.
+        Hello, I am Dinesh Alla — a technologist and entrepreneur.
       </motion.p>
 
       {/* ── Giant heading ──
           Figma canvas = 1440px wide. Exact pixel positions:
             "FOUNDER "   → x=154px  → 154/1440 = 10.69vw   (stroke/outlined)
-            "& CEO OF "  → x=506px  → 506/1440 = 35.14vw   (solid #0a1422)
-            "DT7 "       → inline after & CEO OF             (#ea4723)
+            "& MD OF "  → x=506px  → 506/1440 = 35.14vw   (solid #0a1422)
+            "DT7 "       → inline after & MD OF             (#ea4723)
             "AGENCY"     → x=1001px → 1001/1440 = 69.51vw  (#ea4723)
           Font-size = 84px → 84/1440 = 5.83vw
           We use vw units so it scales perfectly at every viewport width.
@@ -317,7 +315,7 @@ function Hero() {
               color: "#0a1422",
             }}
           >
-            &amp; CEO OF{" "}
+            &amp; MD OF{" "}
             <span style={{ color: "#ea4723" }}>DT7</span>
           </span>
 
@@ -394,7 +392,7 @@ function Hero() {
           maxWidth: 791,
         }}
       >
-        Architecting scalable cloud solutions, building high-performance web applications, and driving digital growth as the Founder &amp; CEO of DT7 Agency.
+        Building scalable cloud solutions, high-performance web applications and digital growth strategies as the Founder & MD of DT7 Agency.
       </motion.p>
 
       {/* ── CTA button — orange circle LEFT, text RIGHT ── */}
@@ -542,21 +540,39 @@ function About() {
 
             {/* Bio paragraph 1 */}
             <p
-              className="text-[15px] md:text-[16px] leading-relaxed text-[#0c0f22] mb-5"
+              className="text-[15px] md:text-[16px] leading-relaxed text-[#0c0f22] mb-1"
               style={{ fontFamily: "'Poppins', sans-serif", fontWeight: 300 }}
             >
-              My career began in 2013 as a junior developer, where I cultivated a deep passion for software engineering, database management, and cloud architecture. Over the next decade, I immersed myself in complex technical ecosystems and leadership roles, mastering the art of building scalable enterprise systems. Driven by a vision to deliver cutting-edge digital transformations, I founded DT7 Solutions in 2022. Our mission is to engineer high-impact web architectures, optimize e-commerce operations, and deploy state-of-the-art cloud infrastructure that empowers modern enterprises to thrive in a digital-first economy.
-            </p>
+              I started my career in 2013 as a Junior Developer, building my foundation in software engineering, database management and cloud technologies. Over the years, my work moved from writing and managing code to designing systems, leading teams and taking responsibility for larger technology projects.            </p>
 
             {/* Bio paragraph 2 */}
             <p
-              className="text-[15px] md:text-[16px] leading-relaxed text-[#0c0f22]"
+              className="text-[15px] md:text-[16px] leading-relaxed text-[#0c0f22] mb-1"
               style={{ fontFamily: "'Poppins', sans-serif", fontWeight: 300 }}
             >
-              Building on the success of DT7 Solutions, I expanded my entrepreneurial footprint by establishing DT7 Agency—a full-service creative powerhouse specializing in brand design, strategic digital marketing, and business growth acceleration. Beyond my core technology ventures, I serve as Managing Partner for several successful enterprises across diverse industries, including Sri Sainadh, Frosinn Rocha, Alanati Ruchulu, and NR Constructions.
-            </p>
-
-            {/* Signature — dark rectangle masked by the signature image */}
+              As I worked across different technical and leadership roles, I became increasingly interested in the bigger picture: how technology, business and execution come together to solve real problems.            </p>
+            
+             {/* Bio paragraph 3 */}
+            <p
+              className="text-[15px] md:text-[16px] leading-relaxed text-[#0c0f22] mb-1"
+              style={{ fontFamily: "'Poppins', sans-serif", fontWeight: 300 }}
+            >
+             In 2022, I founded <a href="https://dt7.agency/" target="_blank" rel="noopener noreferrer" style={{ color: "blue", textDecoration: "underline" }}>DT7 Solutions</a> with a focus on building high-impact web architectures, improving e-commerce operations and creating reliable cloud infrastructure for modern businesses.      </p>     
+             
+             
+             {/* Bio paragraph 4 */}
+            <p
+              className="text-[15px] md:text-[16px] leading-relaxed text-[#0c0f22] mb-1"
+              style={{ fontFamily: "'Poppins', sans-serif", fontWeight: 300 }}
+            >
+             That journey also led to the creation of DT7 Agency, a full-service agency focused on brand design, digital marketing and business growth.    </p>   
+             
+             {/* Bio paragraph 5 */}
+            <p
+              className="text-[15px] md:text-[16px] leading-relaxed text-[#0c0f22] mb-1"
+              style={{ fontFamily: "'Poppins', sans-serif", fontWeight: 300 }}
+            >Today, my work sits at the intersection of technology, business and digital growth. Alongside my own ventures, I also work with businesses across different industries, helping them turn ideas into practical digital solutions.      </p>     
+              {/* Signature — dark rectangle masked by the signature image */}
             <div className="mt-6 mb-8">
               <div
                 style={{
@@ -792,7 +808,7 @@ function Experience() {
                   color: "#0a1422",
                 }}
               >
-                A decade-long trajectory of building clean code, architecting resilient systems, and leading high-performing teams.
+                A decade of learning, building systems, solving problems and taking on bigger responsibilities.
               </p>
             </div>
 
@@ -822,11 +838,11 @@ function Experience() {
           {/* ROW 1 */}
           <div className="grid grid-cols-1 lg:grid-cols-[1fr_180px_1fr] items-center gap-y-6 lg:gap-y-0">
             <ExpCard period="2013 - 2015" role="Junior Developer"
-              desc="Gained deep foundational knowledge in engineering principles, database structures, and software lifecycles while delivering high-quality modules."
+              desc="Built a strong foundation in software development, database systems and engineering practices while working on real-world application modules and software projects.."
               bg="rgba(201,217,253,0.5)" delay={0} side="left" />
             <HDash flip={false} delay={0.2} />
             <ExpCard period="2015 - 2016" role="Senior Developer"
-              desc="Led the design of critical application features, oversaw systems integration, and mentored junior engineers to foster a collaborative code culture."
+              desc="Moved into more complex development work, taking ownership of critical application features, supporting system integration and mentoring junior developers."
               bg="rgba(254,201,203,0.5)" delay={0.4} side="right" />
           </div>
 
@@ -840,11 +856,11 @@ function Experience() {
           {/* ROW 2 */}
           <div className="grid grid-cols-1 lg:grid-cols-[1fr_180px_1fr] items-center gap-y-6 lg:gap-y-0 mt-6 lg:mt-0">
             <ExpCard period="2017 - 2019" role="Team Leader"
-              desc="Spearheaded cross-functional engineering teams, aligning technical deliverables with agile execution and design excellence."
+              desc="Led cross-functional engineering teams, bringing technical execution, design and day-to-day delivery together while keeping projects moving towards their intended outcomes."
               bg="rgba(254,191,220,0.5)" delay={0.4} side="left" />
             <HDash flip={true} delay={0.2} />
             <ExpCard period="2016 - 2017" role="Database Engineer"
-              desc="Architected robust database schemas, optimized complex queries, and ensured absolute data integrity, security, and high availability."
+              desc="Worked on database architecture, query optimisation and data reliability, with a focus on building systems that could remain secure, stable and available as they grew."
               bg="rgba(224,251,202,0.5)" delay={0} side="right" />
           </div>
 
@@ -858,11 +874,11 @@ function Experience() {
           {/* ROW 3 */}
           <div className="grid grid-cols-1 lg:grid-cols-[1fr_180px_1fr] items-center gap-y-6 lg:gap-y-0 mt-6 lg:mt-0">
             <ExpCard period="2019 - 2021" role="Project Manager"
-              desc="Managed end-to-end project lifecycles, mitigated delivery risks, and ensured seamless communication between stakeholders and technical teams."
+              desc="Managed projects from planning through delivery, coordinating technical teams and stakeholders while identifying risks and keeping execution on track. "
               bg="rgba(208,253,232,0.5)" delay={0} side="left" />
             <HDash flip={false} delay={0.2} />
             <ExpCard period="2021 - 2022" role="AWS Architecture"
-              desc="Designed and deployed highly resilient, secure, and cost-efficient cloud infrastructures using modern AWS best practices."
+              desc="Designed and deployed cloud infrastructure on AWS, with an emphasis on reliability, security, scalability and sensible resource usage."
               bg="rgba(189,252,246,0.5)" delay={0.4} side="right" />
           </div>
 
@@ -1530,7 +1546,7 @@ function Testimonials() {
             fontSize: "clamp(22px, 2.36vw, 34px)", color: "#0a1422",
             maxWidth: 753, margin: "0 auto", paddingTop: 48,
           }}>
-            Client Stories — Building Trust and Delivering Real Value.
+            Client Stories — Building trust through good work and delivering value that businesses can actually use.
           </h2>
         </Reveal>
       </div>
@@ -1797,11 +1813,13 @@ function Contact() {
             </h2>
             {/* Tagline */}
             <p style={{ fontFamily: "'Afacad Flux', sans-serif", fontWeight: 300, fontSize: 22, color: "#696969", marginBottom: 8 }}>
-              Let's architect your digital future together. Reach out today.
+             Have an idea, a business challenge or a digital project you're thinking about?
+            Let's talk about it.
+
             </p>
             {/* Address */}
             <p style={{ fontFamily: "'Afacad Flux', sans-serif", fontWeight: 400, fontSize: 18, color: "#0a1422", marginBottom: 4 }}>
-              Dt7 Agency Pvt. Ltd. Chandramouli Nagar, Guntur, Andhra Pradesh - 522007, India
+              <b>Dt7 Agency Pvt. Ltd.</b><br></br>Chandramouli Nagar, Guntur,<br></br> Andhra Pradesh - 522007, India
             </p>
             <p style={{ fontFamily: "'Afacad Flux', sans-serif", fontWeight: 400, fontSize: 18, color: "#0a1422", marginBottom: 4 }} className="flex items-center gap-2 justify-center md:justify-start">
               <span>+91 8885782778</span>
@@ -1820,7 +1838,7 @@ function Contact() {
             <p style={{ fontFamily: "'Afacad Flux', sans-serif", fontWeight: 400, fontSize: 18, color: "#0a1422", marginBottom: 24 }}>dineshalla@gmail.com</p>
             {/* Coffee quote */}
             <p style={{ fontFamily: "'Afacad Flux', sans-serif", fontWeight: 500, fontSize: 34, color: "#0a1422", marginBottom: 32, lineHeight: 1.3 }}>
-              Let's connect, share ideas, and explore how we can collaborate to elevate your business.
+              Let's connect, share ideas and explore how we can move your business forward.
             </p>
 
             {status === "sent" ? (
@@ -1885,7 +1903,7 @@ function Contact() {
                   className="bg-[#f09800] rounded-[22px] px-7 h-[44px] text-white text-[16px] font-medium transition-opacity"
                   style={{ fontFamily: "'Poppins', sans-serif", opacity: status === "loading" ? 0.7 : 1 }}
                 >
-                  {status === "loading" ? "Sending..." : "Submit Now"}
+                  {status === "loading" ? "Sending..." : "Send Message"}
                 </button>
               </form>
             )}

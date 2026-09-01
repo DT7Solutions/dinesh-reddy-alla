@@ -96,7 +96,7 @@ export default function DineshAllaPortfolio() {
       </p>
       <p className="[word-break:break-word] absolute font-['Poppins:Medium',sans-serif] leading-[normal] left-[calc(16.67%+131px)] not-italic text-[#0c0f22] text-[16px] top-[63px] whitespace-nowrap">Home</p>
       <p className="[word-break:break-word] absolute font-['Poppins:Light',sans-serif] leading-[normal] left-[calc(33.33%+93px)] not-italic text-[#0c0f22] text-[18px] top-[170px] whitespace-nowrap">{`👋 Hi, I'm Dinesh Alla and I am the`}</p>
-      <p className="-translate-x-1/2 [word-break:break-word] absolute font-['Poppins:Light',sans-serif] leading-[normal] left-[calc(16.67%+479.5px)] not-italic text-[#0c0f22] text-[18px] text-center top-[774px] w-[791px]">{`Founder & CEO · DT7 Agency Pvt. Ltd. · AWS Architect · Web Development · Cloud Services · Branding · Digital Marketing · Creative Strategies · Business Amplification`}</p>
+      <p className="-translate-x-1/2 [word-break:break-word] absolute font-['Poppins:Light',sans-serif] leading-[normal] left-[calc(16.67%+479.5px)] not-italic text-[#0c0f22] text-[18px] text-center top-[774px] w-[791px]">{`Founder & MD· DT7 Agency Pvt. Ltd. · AWS Architect · Web Development · Cloud Services · Branding · Digital Marketing · Creative Strategies · Business Amplification`}</p>
       <div className="absolute left-[calc(25%+134px)] size-[452px] top-[305px]" data-name="image 19">
         <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgImage19} />
       </div>
