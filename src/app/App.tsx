@@ -1516,10 +1516,71 @@ function Enterprises() {
 
 // ─── TESTIMONIALS ─────────────────────────────────────────────────────────────
 const T_CARDS = [
-  { quote: `\"Working with Dinesh Alla was a masterclass in digital transformation. His dual expertise in AWS cloud architecture and modern web design completely modernized our product delivery pipeline. The efficiency gains exceeded all of our targets.\"`, name: "Phani kumar", company: "Dharani Info Technologies Pvt. Ltd", logo: imgImage28 },
-  { quote: `\"Dinesh is a highly strategic leader. DT7 Agency transformed our brand presence and scaled our digital acquisition campaigns. His approach is data-driven and results-oriented.\"`, name: "Phani kumar", company: "Dharani Info Technologies Pvt. Ltd", logo: imgImage27 },
-  { quote: `\"The e-commerce and web strategies implemented by Dinesh's team at DT7 Solutions enabled us to scale our Amazon and standalone web stores smoothly. His technical execution is top-tier.\"`, name: "Phani kumar", company: "Dharani Info Technologies Pvt. Ltd", logo: imgImage29 },
-  { quote: `\"As a managing partner across several ventures, Dinesh brings absolute clarity, operational discipline, and technical depth. He's an invaluable partner for any high-growth enterprise.\"`, name: "Phani kumar", company: "Dharani Info Technologies Pvt. Ltd", logo: imgImage28 },
+  {
+    name: "Tenali Double Horse",
+    tag: "Food & FMCG Brand",
+    quote: "“Dinesh Alla delivered an impressive digital experience for our brand with exceptional attention to detail. His understanding of design, performance, and user experience helped transform our vision into a modern, professional, and engaging website.”",
+  },
+  {
+    name: "Crane",
+    tag: "Food Industry",
+    quote: "“Working with Dinesh Alla was a great experience. His technical expertise, creative approach, and commitment to quality resulted in a website that represents our brand professionally while delivering a smooth and engaging experience for visitors.”",
+  },
+  {
+    name: "Durga Ghee",
+    tag: "Dairy & Agro Brand",
+    quote: "“Dinesh Alla understood our brand requirements perfectly and created a visually appealing digital presence. His attention to design, responsiveness, and functionality made the entire project seamless and delivered results beyond our expectations.”",
+  },
+  {
+    name: "Aqamine",
+    tag: "Water & Mineral Solutions",
+    quote: "“Dinesh Alla brought creativity and technical excellence to our website project. His ability to combine modern design with intuitive functionality created a polished digital experience that effectively communicates our brand and services.”",
+  },
+  {
+    name: "Sai Bhaskar Hospitals",
+    tag: "Super Specialty Healthcare",
+    quote: "“Dinesh Alla developed a professional and user-friendly website that reflects our healthcare services effectively. His dedication, creative thinking, and technical knowledge made the project smooth, resulting in a digital presence we are proud of.”",
+  },
+  {
+    name: "Omega Anu Hospitals",
+    tag: "Multispeciality Healthcare",
+    quote: "“We appreciate Dinesh Alla’s professionalism and commitment throughout our website development. He created a modern, responsive, and informative platform that makes it easier for patients and visitors to understand and connect with our services.”",
+  },
+  {
+    name: "Dr. Seshaiah's Praja Vydyasala Multispeciality Hospital",
+    tag: "Healthcare & Patient Services",
+    quote: "“Dinesh Alla delivered a thoughtful and professional website experience for our hospital. His attention to usability, responsive design, and clear presentation helped create a platform that communicates our healthcare services with confidence and clarity.”",
+  },
+  {
+    name: "VSB Group",
+    tag: "Construction Industry",
+    quote: "“Dinesh Alla demonstrated excellent creativity and technical expertise while developing our digital presence. His professional approach, attention to detail, and ability to understand our requirements resulted in an impressive website aligned with our business vision.”",
+  },
+  {
+    name: "Coastal",
+    tag: "Construction Industry",
+    quote: "“Dinesh Alla brought a fresh perspective to our website development with strong design skills and technical execution. His dedication to delivering quality work resulted in a modern, engaging, and professional digital experience for our audience.”",
+  },
+  {
+    name: "CREDAI Guntur",
+    tag: "Real Estate & Developers Chapter",
+    quote: "“Dinesh Alla successfully translated our requirements into a professional digital platform. His creative approach, technical expertise, and attention to detail ensured an engaging website that represents our organization effectively and provides visitors with an excellent experience.”",
+  },
+  {
+    name: "Tufftron",
+    tag: "Construction Industry",
+    quote: "“Dinesh Alla created a modern and engaging website that effectively showcases our brand and products. His innovative ideas, technical expertise, and commitment to perfection made the development process smooth and delivered an impressive final result.”",
+  },
+  {
+    name: "AKR Jewellers",
+    tag: "Luxury Fine Jewellery",
+    quote: "“Dinesh Alla understood our brand’s premium identity and translated it beautifully into the digital experience. His creativity, attention to detail, and technical expertise resulted in an elegant website that strengthens our online presence significantly.”",
+  },
+  {
+    name: "Suma Filmy Arts",
+    tag: "Media & Film Entertainment",
+    quote: "“Dinesh Alla brought creativity and professionalism to our website project, understanding our unique requirements and delivering an engaging digital experience. His technical expertise, design sense, and dedication made the entire collaboration smooth and highly successful.”",
+  },
 ];
 
 function Testimonials() {
@@ -1533,8 +1594,6 @@ function Testimonials() {
   const handleNextT = () => {
     setActiveT((prev) => (prev + 1) % T_CARDS.length);
   };
-
-  const isMarqueePaused = hoveredIdx !== null;
 
   return (
     <section id="testimonials" className="bg-white pb-16 md:pb-24">
@@ -1556,11 +1615,11 @@ function Testimonials() {
       <div className="hidden md:block" style={{ overflow: "hidden", width: "100%" }}>
         <style>{`
           @keyframes marquee {
-            0% { transform: translateX(-430px); }
-            100% { transform: translateX(-2030px); }
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
           }
           .animate-marquee {
-            animation: marquee 25s linear infinite;
+            animation: marquee 50s linear infinite;
           }
           .animate-marquee:hover {
             animation-play-state: paused;
@@ -1592,6 +1651,7 @@ function Testimonials() {
                   padding: "31px 32px 28px 32px",
                   display: "flex",
                   flexDirection: "column",
+                  justifyContent: "space-between",
                   boxShadow: isHovered ? "0 20px 40px rgba(240,152,0,0.15)" : "none",
                   transform: isHovered ? "scale(1.03)" : "scale(1)",
                   opacity: isAnyHovered && !isHovered ? 0.5 : 1,
@@ -1602,25 +1662,20 @@ function Testimonials() {
                 {/* Quote */}
                 <p style={{
                   fontFamily: "'Afacad Flux', sans-serif", fontWeight: 300,
-                  fontSize: 22, color: "#0a1422", lineHeight: 1.45,
+                  fontSize: 21, color: "#0a1422", lineHeight: 1.5,
                   flex: 1, marginBottom: 20,
                 }}>
                   {t.quote}
                 </p>
 
-                {/* Bottom: name+company LEFT, logo RIGHT */}
-                <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 12 }}>
-                  <div>
-                    <p style={{ fontFamily: "'Afacad Flux', sans-serif", fontWeight: 600, fontSize: 28, color: "#0a1422", margin: 0 }}>
-                      {t.name}
-                    </p>
-                    <p style={{ fontFamily: "'Afacad Flux', sans-serif", fontWeight: 400, fontSize: 18, color: "#0a1422", margin: 0 }}>
-                      {t.company}
-                    </p>
-                  </div>
-                  <div style={{ width: 72, height: 60, background: "white", borderRadius: 8, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
-                    <img src={t.logo} alt={t.name} style={{ maxWidth: "80%", maxHeight: "80%", objectFit: "contain", pointerEvents: "none" }} />
-                  </div>
+                {/* Bottom: company name + tag */}
+                <div>
+                  <p style={{ fontFamily: "'Afacad Flux', sans-serif", fontWeight: 600, fontSize: 26, color: "#0a1422", margin: 0, lineHeight: 1.2 }}>
+                    {t.name}
+                  </p>
+                  <p style={{ fontFamily: "'Afacad Flux', sans-serif", fontWeight: 400, fontSize: 17, color: "#707070", margin: "3px 0 0 0" }}>
+                    {t.tag}
+                  </p>
                 </div>
               </div>
             );
@@ -1648,7 +1703,7 @@ function Testimonials() {
             transition={{ duration: 0.4 }}
             style={{
               fontFamily: "'Afacad Flux', sans-serif", fontWeight: 300,
-              fontSize: 20, color: "#0a1422", lineHeight: 1.45,
+              fontSize: 19, color: "#0a1422", lineHeight: 1.45,
               flex: 1, marginBottom: 20,
             }}
           >
@@ -1656,18 +1711,13 @@ function Testimonials() {
           </motion.p>
 
           {/* Bottom */}
-          <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 12 }}>
-            <div>
-              <p style={{ fontFamily: "'Afacad Flux', sans-serif", fontWeight: 600, fontSize: 24, color: "#0a1422", margin: 0 }}>
-                {T_CARDS[activeT].name}
-              </p>
-              <p style={{ fontFamily: "'Afacad Flux', sans-serif", fontWeight: 400, fontSize: 16, color: "#0a1422", margin: 0 }}>
-                {T_CARDS[activeT].company}
-              </p>
-            </div>
-            <div style={{ width: 64, height: 52, background: "white", borderRadius: 8, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
-              <img src={T_CARDS[activeT].logo} alt="" style={{ maxWidth: "80%", maxHeight: "80%", objectFit: "contain", pointerEvents: "none" }} />
-            </div>
+          <div>
+            <p style={{ fontFamily: "'Afacad Flux', sans-serif", fontWeight: 600, fontSize: 22, color: "#0a1422", margin: 0, lineHeight: 1.2 }}>
+              {T_CARDS[activeT].name}
+            </p>
+            <p style={{ fontFamily: "'Afacad Flux', sans-serif", fontWeight: 400, fontSize: 15, color: "#707070", margin: "2px 0 0 0" }}>
+              {T_CARDS[activeT].tag}
+            </p>
           </div>
         </div>
 
