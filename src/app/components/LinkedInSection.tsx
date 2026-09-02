@@ -5,13 +5,14 @@ import {
   ArrowUpRight,
   ShieldCheck,
   ThumbsUp,
-  MessageSquare,
-  Repeat2,
-  Send,
   Globe,
-  Layers,
   TrendingUp,
-  Users,
+  Megaphone,
+  Code2,
+  GraduationCap,
+  Building2,
+  Sparkles,
+  Target,
 } from "lucide-react";
 import imgRectangle34 from "../../imports/DineshAllaPortfolio/dfcb74d743d45e2b342af9f04c54f6ed74efd874.png";
 
@@ -19,7 +20,7 @@ const LINKEDIN_URL = "https://www.linkedin.com/in/dineshalla/";
 
 export default function LinkedInSection() {
   const [liked, setLiked] = useState(false);
-  const [likesCount, setLikesCount] = useState(248);
+  const [likesCount, setLikesCount] = useState(318);
 
   const handleLike = () => {
     setLiked(!liked);
@@ -53,13 +54,13 @@ export default function LinkedInSection() {
         {/* 2-Column Clean Layout */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center max-w-5xl mx-auto">
           
-          {/* ── LEFT: Crisp LinkedIn Profile & Featured Post Card (Cols 6) ── */}
+          {/* ── LEFT: Crisp LinkedIn Profile & Featured Post Card (Cols 5) ── */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="lg:col-span-6"
+            className="lg:col-span-5"
           >
             <div className="bg-white rounded-2xl border border-[#e2eaf2] shadow-[0_10px_30px_rgba(0,119,181,0.06)] overflow-hidden">
               
@@ -110,28 +111,45 @@ export default function LinkedInSection() {
                 <div className="mb-4">
                   <div className="flex items-center gap-1.5">
                     <h3 className="text-lg font-bold text-[#0a1422]" style={{ fontFamily: "'Afacad Flux', sans-serif" }}>
-                      Dinesh Alla
+                      DINESH ALLA
                     </h3>
                     <ShieldCheck className="w-4 h-4 text-[#0077b5]" />
+                    <span className="text-[11px] text-[#64748b] font-normal">He/Him</span>
                   </div>
-                  <p className="text-xs text-[#475569] font-medium">
-                    Founder &amp; MD @ DT7 Agency • AWS Solutions Architect
+                  <p className="text-xs text-[#334155] font-medium leading-relaxed mt-1">
+                    Managing Director @ DT7 Agency | SEO, Google Ads, Meta Ads &amp; Amazon Ads Specialist
                   </p>
-                  <p className="text-[11px] text-[#8c9ba5] flex items-center gap-1 mt-0.5">
-                    <Globe className="w-3 h-3" />
-                    <span>500+ connections • Andhra Pradesh, India</span>
+                  
+                  {/* Affiliations badges */}
+                  <div className="mt-2.5 pt-2.5 border-t border-[#f1f5f9] space-y-1.5 text-[11px] text-[#475569]">
+                    <div className="flex items-center gap-1.5 font-medium text-[#0f172a]">
+                      <Building2 className="w-3.5 h-3.5 text-[#f09800] flex-shrink-0" />
+                      <span>DT7 Agency</span>
+                    </div>
+                    <div className="flex items-center gap-1.5 font-medium text-[#0f172a]">
+                      <GraduationCap className="w-3.5 h-3.5 text-[#0077b5] flex-shrink-0" />
+                      <span>Indian Institute of Management Visakhapatnam</span>
+                    </div>
+                  </div>
+
+                  <p className="text-[11px] text-[#64748b] flex items-center gap-1 mt-2">
+                    <Globe className="w-3 h-3 text-[#0077b5]" />
+                    <span>519 followers • 431 connections • Andhra Pradesh, India</span>
                   </p>
                 </div>
 
                 {/* Short Featured Post Box */}
-                <div className="bg-[#f8fbfe] rounded-xl p-3.5 border border-[#e8f1f8] space-y-2.5">
+                <div className="bg-[#f8fbfe] rounded-xl p-3.5 border border-[#e8f1f8] space-y-2">
                   <div className="flex items-center justify-between text-[11px] text-[#64748b]">
-                    <span className="font-semibold text-[#0077b5]">Featured Insight</span>
-                    <span>2d ago</span>
+                    <span className="font-semibold text-[#0077b5] flex items-center gap-1">
+                      <Sparkles className="w-3 h-3" />
+                      Featured Philosophy
+                    </span>
+                    <span>Recent Insight</span>
                   </div>
 
-                  <p className="text-xs text-[#334155] leading-relaxed" style={{ fontFamily: "'Poppins', sans-serif", fontWeight: 300 }}>
-                    &ldquo;Scalable cloud architecture isn&apos;t just about handling traffic peaks—it&apos;s about building lean, modular systems that accelerate business growth.&rdquo;
+                  <p className="text-xs text-[#334155] leading-relaxed italic" style={{ fontFamily: "'Poppins', sans-serif", fontWeight: 300 }}>
+                    &ldquo;Before crafting a strategy, we invest time in understanding unique organizational needs and challenges—delivering measurable digital growth and tangible ROI.&rdquo;
                   </p>
 
                   <div className="flex items-center justify-between text-[11px] text-[#64748b] border-t border-[#e2eaf2] pt-2">
@@ -149,9 +167,9 @@ export default function LinkedInSection() {
                       href={LINKEDIN_URL}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-[#0077b5] hover:underline flex items-center gap-0.5"
+                      className="text-[#0077b5] hover:underline flex items-center gap-0.5 font-medium"
                     >
-                      <span>Read Post</span>
+                      <span>View Profile</span>
                       <ArrowUpRight className="w-3 h-3" />
                     </a>
                   </div>
@@ -162,69 +180,149 @@ export default function LinkedInSection() {
           </motion.div>
 
 
-          {/* ── RIGHT: Concise Content & Direct Actions (Cols 6) ── */}
+          {/* ── RIGHT: Enhanced Content Points & Highlights (Cols 7) ── */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className="lg:col-span-6 space-y-5"
+            className="lg:col-span-7 space-y-5"
           >
             <div>
               <p
-                className="text-[24px] md:text-[28px] font-semibold text-[#0a1422] leading-snug mb-2"
+                className="text-[24px] md:text-[28px] font-semibold text-[#0a1422] leading-snug mb-1.5"
                 style={{ fontFamily: "'Afacad Flux', sans-serif" }}
               >
-                Let&apos;s Connect, Collaborate &amp; Build Together
+                Driving Digital Success &amp; Scalable Growth
               </p>
               <p
-                className="text-sm text-[#556987] leading-relaxed"
+                className="text-xs md:text-sm text-[#556987] leading-relaxed"
                 style={{ fontFamily: "'Poppins', sans-serif", fontWeight: 300 }}
               >
-                Follow my journey on LinkedIn for practical breakdowns on AWS cloud systems, tech agency leadership, and digital growth.
+                Follow my journey on LinkedIn for actionable strategies on multi-channel performance marketing, high-impact web design, and result-driven agency execution.
               </p>
             </div>
 
-            {/* 3 Short Bullet Points */}
-            <div className="space-y-2.5">
-              {[
-                { icon: Layers, text: "AWS Cloud & Resilient System Architecture" },
-                { icon: TrendingUp, text: "Scaling Digital Ventures & E-Commerce" },
-                { icon: Users, text: "Technology Advisory & Strategic Partnerships" },
-              ].map((item) => (
-                <div
-                  key={item.text}
-                  className="flex items-center gap-3 p-2.5 rounded-xl bg-white border border-[#e2eaf2] shadow-xs"
-                >
-                  <div className="w-7 h-7 rounded-lg bg-[#0077b5]/10 text-[#0077b5] flex items-center justify-center flex-shrink-0">
-                    <item.icon className="w-4 h-4" />
+            {/* Enhanced Feature Points based on LinkedIn Details */}
+            <div className="space-y-3">
+              
+              {/* Point 1: Performance Marketing & Ads */}
+              <div className="p-3.5 rounded-xl bg-white border border-[#e2eaf2] shadow-xs hover:border-[#0077b5]/40 transition-all duration-200">
+                <div className="flex items-start gap-3">
+                  <div className="w-8 h-8 rounded-lg bg-[#0077b5]/10 text-[#0077b5] flex items-center justify-center flex-shrink-0 mt-0.5">
+                    <Target className="w-4 h-4" />
                   </div>
-                  <span className="text-xs md:text-sm font-medium text-[#1e293b]" style={{ fontFamily: "'Poppins', sans-serif" }}>
-                    {item.text}
-                  </span>
+                  <div className="flex-1 min-w-0">
+                    <div className="flex items-center justify-between gap-2 mb-1">
+                      <h4 className="text-xs md:text-sm font-semibold text-[#0a1422]" style={{ fontFamily: "'Poppins', sans-serif" }}>
+                        Multi-Channel Ads &amp; High-ROI Growth
+                      </h4>
+                      <span className="text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded-full bg-[#0077b5]/10 text-[#0077b5]">
+                        Core Focus
+                      </span>
+                    </div>
+                    <p className="text-xs text-[#556987] leading-relaxed" style={{ fontFamily: "'Poppins', sans-serif", fontWeight: 300 }}>
+                      Driving customer acquisition and maximizing return on ad spend across SEO, Google Ads, Facebook Ads, and Amazon Ads.
+                    </p>
+                    <div className="flex flex-wrap gap-1.5 mt-2">
+                      {["SEO", "Google Ads", "Facebook Ads", "Amazon Ads", "ROI Optimization"].map((tag) => (
+                        <span
+                          key={tag}
+                          className="px-2 py-0.5 rounded-md bg-[#f1f5f9] text-[#334155] text-[10px] font-medium"
+                        >
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
                 </div>
-              ))}
+              </div>
+
+              {/* Point 2: Web Design & Development */}
+              <div className="p-3.5 rounded-xl bg-white border border-[#e2eaf2] shadow-xs hover:border-[#f09800]/40 transition-all duration-200">
+                <div className="flex items-start gap-3">
+                  <div className="w-8 h-8 rounded-lg bg-[#f09800]/10 text-[#f09800] flex items-center justify-center flex-shrink-0 mt-0.5">
+                    <Code2 className="w-4 h-4" />
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <div className="flex items-center justify-between gap-2 mb-1">
+                      <h4 className="text-xs md:text-sm font-semibold text-[#0a1422]" style={{ fontFamily: "'Poppins', sans-serif" }}>
+                        Exceptional Web Design &amp; Development
+                      </h4>
+                      <span className="text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded-full bg-[#f09800]/10 text-[#f09800]">
+                        Full-Cycle
+                      </span>
+                    </div>
+                    <p className="text-xs text-[#556987] leading-relaxed" style={{ fontFamily: "'Poppins', sans-serif", fontWeight: 300 }}>
+                      Delivering custom, responsive website design and internet development solutions built to scale from startups to large corporations.
+                    </p>
+                    <div className="flex flex-wrap gap-1.5 mt-2">
+                      {["Custom Web Design", "Internet Solutions", "Startups & Enterprises"].map((tag) => (
+                        <span
+                          key={tag}
+                          className="px-2 py-0.5 rounded-md bg-[#f1f5f9] text-[#334155] text-[10px] font-medium"
+                        >
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Point 3: Strategic Leadership & Agency Innovation */}
+              <div className="p-3.5 rounded-xl bg-white border border-[#e2eaf2] shadow-xs hover:border-[#10b981]/40 transition-all duration-200">
+                <div className="flex items-start gap-3">
+                  <div className="w-8 h-8 rounded-lg bg-[#10b981]/10 text-[#10b981] flex items-center justify-center flex-shrink-0 mt-0.5">
+                    <TrendingUp className="w-4 h-4" />
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <div className="flex items-center justify-between gap-2 mb-1">
+                      <h4 className="text-xs md:text-sm font-semibold text-[#0a1422]" style={{ fontFamily: "'Poppins', sans-serif" }}>
+                        Strategic Leadership &amp; Continuous Innovation
+                      </h4>
+                      <span className="text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded-full bg-[#10b981]/10 text-[#10b981]">
+                        Leadership
+                      </span>
+                    </div>
+                    <p className="text-xs text-[#556987] leading-relaxed" style={{ fontFamily: "'Poppins', sans-serif", fontWeight: 300 }}>
+                      Managing Director at DT7 Agency, dedicated to continuous innovation, achieving clients&apos; core business objectives, and ensuring complete customer satisfaction.
+                    </p>
+                    <div className="flex flex-wrap gap-1.5 mt-2">
+                      {["DT7 Agency MD", "Digital Leadership", "Client Satisfaction", "Tangible Results"].map((tag) => (
+                        <span
+                          key={tag}
+                          className="px-2 py-0.5 rounded-md bg-[#f1f5f9] text-[#334155] text-[10px] font-medium"
+                        >
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </div>
+
             </div>
 
-            {/* Compact Stats */}
-            <div className="grid grid-cols-3 gap-2 p-3 rounded-xl bg-[#0a1422] text-white text-center">
+            {/* Compact Highlighted Stats */}
+            <div className="grid grid-cols-3 gap-2 p-3 rounded-xl bg-[#0a1422] text-white text-center shadow-sm">
               <div>
-                <span className="block text-xl font-bold text-[#f09800]" style={{ fontFamily: "'Afacad Flux', sans-serif" }}>
-                  500+
+                <span className="block text-lg md:text-xl font-bold text-[#38bdf8]" style={{ fontFamily: "'Afacad Flux', sans-serif" }}>
+                  519+
+                </span>
+                <span className="text-[10px] text-slate-300">Followers</span>
+              </div>
+              <div className="border-x border-white/15">
+                <span className="block text-lg md:text-xl font-bold text-[#f09800]" style={{ fontFamily: "'Afacad Flux', sans-serif" }}>
+                  431+
                 </span>
                 <span className="text-[10px] text-slate-300">Connections</span>
               </div>
-              <div className="border-x border-white/15">
-                <span className="block text-xl font-bold text-[#38bdf8]" style={{ fontFamily: "'Afacad Flux', sans-serif" }}>
-                  11+
-                </span>
-                <span className="text-[10px] text-slate-300">Yrs in Tech</span>
-              </div>
               <div>
-                <span className="block text-xl font-bold text-[#4ade80]" style={{ fontFamily: "'Afacad Flux', sans-serif" }}>
-                  6+
+                <span className="block text-lg md:text-xl font-bold text-[#4ade80]" style={{ fontFamily: "'Afacad Flux', sans-serif" }}>
+                  100%
                 </span>
-                <span className="text-[10px] text-slate-300">Ventures</span>
+                <span className="text-[10px] text-slate-300">Tangible Results</span>
               </div>
             </div>
 
@@ -233,11 +331,11 @@ export default function LinkedInSection() {
               href={LINKEDIN_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center gap-2 w-full py-3 rounded-full bg-[#0077b5] hover:bg-[#005f93] text-white text-sm font-semibold shadow-md hover:shadow-lg transition-all duration-200 hover:scale-[1.02] active:scale-95"
+              className="inline-flex items-center justify-center gap-2 w-full py-3 rounded-full bg-[#0077b5] hover:bg-[#005f93] text-white text-xs md:text-sm font-semibold shadow-md hover:shadow-lg transition-all duration-200 hover:scale-[1.02] active:scale-95"
               style={{ fontFamily: "'Poppins', sans-serif" }}
             >
               <Linkedin className="w-4 h-4 fill-current" />
-              <span>Connect with Dinesh Alla</span>
+              <span>Connect with Dinesh Alla on LinkedIn</span>
               <ArrowUpRight className="w-4 h-4" />
             </a>
 
