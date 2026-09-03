@@ -20,7 +20,7 @@ import imgImage18 from "../imports/DineshAllaPortfolio/b3cdd2ceeff87513c3dfe606a
 import imgImage20 from "../imports/DineshAllaPortfolio/46c931e692faa9a20272963f83fb68b5c8946e3f.png";
 import imgImage21 from "../imports/DineshAllaPortfolio/61a2bcb7867173274ae582a3656738234db3a8ed.png";
 import imgSignature from "../imports/DineshAllaPortfolio/bc9c5a714f1df6f80d2ec01bae2bb5a0985cd65f.png";
-import imgLogo from "../imports/DineshAllaPortfolio/logo.jpeg";
+import imgLogo from "../imports/DineshAllaPortfolio/logo.png";
 import LinkedInSection from "./components/LinkedInSection";
 // ─── Helpers ──────────────────────────────────────────────────────────────────
 function Reveal({
