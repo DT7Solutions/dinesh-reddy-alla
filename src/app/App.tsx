@@ -1836,11 +1836,11 @@ function Contact() {
                     Follow Now
                   </p>
                   <div style={{ display: "flex", gap: 16, alignItems: "center" }}>
-                    <a href="https://instagram.com/" target="_blank" rel="noopener noreferrer">
-                      <img src={imgImage18} alt="Instagram" style={{ width: 21, height: 21, objectFit: "cover" }} />
+                    <a href="https://www.instagram.com/alladineshreddy/?hl=en" target="_blank" rel="noopener noreferrer">
+                      <img src={imgImage20} alt="Instagram" style={{ width: 21, height: 21, objectFit: "cover" }} />
                     </a>
-                    <a href="https://facebook.com/" target="_blank" rel="noopener noreferrer">
-                      <img src={imgImage20} alt="Facebook" style={{ width: 22, height: 21, objectFit: "cover" }} />
+                    <a href="https://www.facebook.com/alladineshreddy" target="_blank" rel="noopener noreferrer">
+                      <img src={imgImage18} alt="Facebook" style={{ width: 22, height: 21, objectFit: "cover" }} />
                     </a>
                     <a href="https://www.linkedin.com/in/dineshalla/" target="_blank" rel="noopener noreferrer">
                       <img src={imgImage21} alt="LinkedIn" style={{ width: 21, height: 21, objectFit: "cover" }} />
