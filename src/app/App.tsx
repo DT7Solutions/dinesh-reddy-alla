@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { motion, useInView, useScroll } from "motion/react";
+import { Facebook, Instagram, Linkedin } from "lucide-react";
 import svgPaths from "../imports/DineshAllaPortfolio/svg-ux7tgka6em";
 import imgImage19 from "../imports/DineshAllaPortfolio/ae7ff146b4f0cd8702caa1b9b115640b9a811a06.png";
 import imgRectangle34 from "../imports/DineshAllaPortfolio/dfcb74d743d45e2b342af9f04c54f6ed74efd874.png";
@@ -16,9 +17,6 @@ import imgImage27 from "../imports/DineshAllaPortfolio/bc52af5fb41b673e2e8913e05
 import imgImage28 from "../imports/DineshAllaPortfolio/c8aa41f540ace662dccf2342ca9a2eba01848cc2.png";
 import imgImage29 from "../imports/DineshAllaPortfolio/7bce286c19fd06c096e3c36dda5ae9fb1814c9c5.png";
 import imgEllipse17 from "../imports/DineshAllaPortfolio/b3e478665f65a54c3998b8eea9c580caa58d2df3.png";
-import imgImage18 from "../imports/DineshAllaPortfolio/b3cdd2ceeff87513c3dfe606a0471608fbec5eab.png";
-import imgImage20 from "../imports/DineshAllaPortfolio/46c931e692faa9a20272963f83fb68b5c8946e3f.png";
-import imgImage21 from "../imports/DineshAllaPortfolio/61a2bcb7867173274ae582a3656738234db3a8ed.png";
 import imgSignature from "../imports/DineshAllaPortfolio/bc9c5a714f1df6f80d2ec01bae2bb5a0985cd65f.png";
 import imgLogo from "../imports/DineshAllaPortfolio/logo.png";
 import LinkedInSection from "./components/LinkedInSection";
@@ -1836,14 +1834,14 @@ function Contact() {
                     Follow Now
                   </p>
                   <div style={{ display: "flex", gap: 16, alignItems: "center" }}>
-                    <a href="https://www.instagram.com/alladineshreddy/?hl=en" target="_blank" rel="noopener noreferrer">
-                      <img src={imgImage20} alt="Instagram" style={{ width: 21, height: 21, objectFit: "cover" }} />
+                    <a href="https://www.instagram.com/alladineshreddy/?hl=en" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="text-[#0a1422] hover:text-[#E4405F] transition-all duration-200 hover:scale-110">
+                      <Instagram aria-hidden="true" size={21} />
                     </a>
-                    <a href="https://www.facebook.com/alladineshreddy" target="_blank" rel="noopener noreferrer">
-                      <img src={imgImage18} alt="Facebook" style={{ width: 22, height: 21, objectFit: "cover" }} />
+                    <a href="https://www.facebook.com/alladineshreddy" target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="text-[#0a1422] hover:text-[#1877F2] transition-all duration-200 hover:scale-110">
+                      <Facebook aria-hidden="true" size={22} />
                     </a>
-                    <a href="https://www.linkedin.com/in/dineshalla/" target="_blank" rel="noopener noreferrer">
-                      <img src={imgImage21} alt="LinkedIn" style={{ width: 21, height: 21, objectFit: "cover" }} />
+                    <a href="https://www.linkedin.com/in/dineshalla/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className="text-[#0a1422] hover:text-[#0A66C2] transition-all duration-200 hover:scale-110">
+                      <Linkedin aria-hidden="true" size={21} />
                     </a>
                     <a href="https://wa.me/918885782778" target="_blank" rel="noopener noreferrer" title="Chat on WhatsApp" className="text-[#0a1422] hover:text-[#25D366] transition-colors duration-200">
                       <svg width="22" height="21" viewBox="0 0 24 24" fill="currentColor" style={{ display: "block" }}>
